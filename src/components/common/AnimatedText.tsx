@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import Animated, { Easing } from 'react-native-reanimated';
 
 import { Animated, StyleSheet, View } from 'react-native';
 

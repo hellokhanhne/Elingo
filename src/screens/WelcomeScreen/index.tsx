@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import AnimatedText from '../../components/common/AnimatedText';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { Button } from '../../components/common/Button';
 import { ToolTip } from '../../components/common/ToolTip';
 import { IMAGES } from '../../constant';
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
   bottomContainer: {
     borderTopColor: '#f5f5f5',
     borderTopWidth: 1,
-    marginBottom: 10,
+    marginBottom: Platform.OS === 'ios' ? 10 : 25,
     paddingHorizontal: '7.5%',
     paddingTop: 20,
   },
