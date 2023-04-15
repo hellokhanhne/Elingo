@@ -22,7 +22,8 @@ const StartSurvayScreen: React.FunctionComponent<
   const navigate = useNavigation();
   const handleContinue = () => {
     if (currentStep === 6) {
-      return console.log(survey);
+      console.log(survey);
+      return navigate.navigate('WelcomeCreateProfileScreen' as never);
     }
     dispatch(setCurrentStep(currentStep + 1));
   };
@@ -138,7 +139,7 @@ const StartSurvayScreen: React.FunctionComponent<
         <Button
           type={activeContinue ? 'filled' : 'light'}
           active={activeContinue}
-          text="Continue"
+          text="Tiếp tục"
           onPress={handleContinue}
         />
       </View>

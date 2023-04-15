@@ -21,6 +21,8 @@ export const Colors = {
   lightPrimary: '#f0edff',
   lightGray: '#F1F1F1',
   nomalGray: '#EEEEEE',
+  black: '#000',
+  mediumGray: '#a3a2a2',
 };
 
 export const NavigationColors = {
