@@ -10,14 +10,19 @@ const Input: React.FunctionComponent<IInputProps> = props => {
   const handleFocus = () => {
     setBorderColor(Colors.primary);
   };
+  const style = props.style || {};
   return (
     <View style={styles.container}>
       <TextInput
         onFocus={handleFocus}
-        style={{ ...styles.input, borderBottomColor: borderColor }}
         defaultValue="Andrew ainslew"
         placeholderTextColor={Colors.black}
         {...props}
+        style={{
+          ...styles.input,
+          borderBottomColor: borderColor,
+          ...(style as Object),
+        }}
       />
     </View>
   );

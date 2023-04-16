@@ -16,11 +16,13 @@ import { MMKV } from 'react-native-mmkv';
 import { api } from '../services/api';
 import theme from './theme';
 import survay from './survay';
+import register from './register';
 
 const reducers = combineReducers({
   theme,
   [api.reducerPath]: api.reducer,
   survay: survay,
+  registerForm: register,
 });
 
 const storage = new MMKV();

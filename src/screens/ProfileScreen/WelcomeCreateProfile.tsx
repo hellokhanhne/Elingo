@@ -24,7 +24,7 @@ export function WelcomeCreateProfileScreen(
   const transformY = React.useRef(new Animated.Value(100)).current;
   const opacity = React.useRef(new Animated.Value(0)).current;
 
-  console.log(opacity);
+  // console.log(opacity);
 
   const transformAction = () => {
     Animated.parallel([
@@ -100,7 +100,7 @@ export function WelcomeCreateProfileScreen(
       >
         <Button
           onPress={() => {
-            navigate.navigate('' as never);
+            navigate.navigate('Register' as never);
           }}
           text="Tạo tài khoản"
         />

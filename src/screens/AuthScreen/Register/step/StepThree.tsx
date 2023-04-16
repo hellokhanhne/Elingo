@@ -9,14 +9,14 @@ import {
   setDataRegisterForm,
 } from '../../../../store/register';
 
-interface IStepOneProps {}
+interface IStepThreeProps {}
 
-const StepOne: React.FunctionComponent<IStepOneProps> = props => {
+const StepThree: React.FunctionComponent<IStepThreeProps> = props => {
   const { Fonts } = useTheme();
-  const fullname = useSelector(registerFormSelector).data?.fullname;
+  const email = useSelector(registerFormSelector).data?.email;
   const dispatch = useDispatch();
-  const handleChange = (fullname: string) => {
-    dispatch(setDataRegisterForm({ fullname }));
+  const handleChange = (email: string) => {
+    dispatch(setDataRegisterForm({ email }));
   };
 
   return (
@@ -29,10 +29,14 @@ const StepOne: React.FunctionComponent<IStepOneProps> = props => {
         }}
       >
         {' '}
-        Tên của bạn là gì ? 🧑👩
+        Email của bạn là gì ? 📧
       </Text>
-      <Text style={styles.label}>Tên đầy đủ</Text>
-      <Input value={fullname} onChangeText={handleChange} />
+      <Text style={styles.label}>Email</Text>
+      <Input
+        value={email}
+        keyboardType="email-address"
+        onChangeText={handleChange}
+      />
     </View>
   );
 };
@@ -49,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepOne;
+export default StepThree;

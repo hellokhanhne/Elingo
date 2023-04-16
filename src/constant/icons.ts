@@ -12,6 +12,9 @@ const AppStore = require('../assets/icons/app-store.png');
 const YouTube = require('../assets/icons/youtube.png');
 const TikTok = require('../assets/icons/tik-tok.png');
 
+const PasswordShow = require('../assets/icons/password-show.png');
+const PasswordHide = require('../assets/icons/password-hide.png');
+
 const socialIcons = {
   Facebook,
   Google,
@@ -44,6 +47,8 @@ const ICONS = {
   USA,
   ...socialIcons,
   ...reasonsIcons,
+  PasswordHide,
+  PasswordShow,
 };
 
 export default ICONS;
