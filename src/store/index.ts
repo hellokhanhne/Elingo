@@ -17,12 +17,14 @@ import { api } from '../services/api';
 import theme from './theme';
 import survay from './survay';
 import register from './register';
+import auth from './auth';
 
 const reducers = combineReducers({
   theme,
   [api.reducerPath]: api.reducer,
   survay: survay,
   registerForm: register,
+  auth: auth,
 });
 
 const storage = new MMKV();

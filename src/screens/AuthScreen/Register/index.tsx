@@ -9,6 +9,8 @@ import {
   registerFormSelector,
   setCurrentStepRegister,
 } from '../../../store/register';
+import { register } from '../../../store/auth';
+import { useAppDispatch } from '../../../hooks/store';
 
 interface IRegisterScreenProps {}
 
@@ -20,10 +22,11 @@ const RegisterScreen: React.FunctionComponent<IRegisterScreenProps> = props => {
   // console.log(currentStep);
 
   const dispatch = useDispatch();
+  const appDispatch = useAppDispatch();
 
   const handleContinue = () => {
     if (currentStep === 4) {
-      console.log(data);
+      appDispatch(register(data));
       return;
     }
     dispatch(setCurrentStepRegister(currentStep + 1));
