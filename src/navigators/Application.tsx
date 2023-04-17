@@ -14,6 +14,7 @@ import SplashScreen from '../screens/SplashSceen';
 import StartSurvayScreen from '../screens/StartSurvey';
 import { WelcomeScreen } from '../screens/WelcomeScreen';
 import RegisterScreen from '../screens/AuthScreen/Register';
+import LoginScreen from '../screens/AuthScreen/Login';
 
 const Stack = createStackNavigator();
 
@@ -28,12 +29,12 @@ const ApplicationNavigator = () => {
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
         <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
         <Stack.Navigator
-          initialRouteName="WelcomeScreen"
+          initialRouteName="Login"
           screenOptions={{ headerShown: false }}
         >
           {/* <Stack.Screen name="Main" component={MainNavigator} /> */}
           <Stack.Screen name="Register" component={RegisterScreen} />
-
+          <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen
