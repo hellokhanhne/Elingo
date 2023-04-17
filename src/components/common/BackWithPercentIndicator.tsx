@@ -6,31 +6,41 @@ import { useTheme } from '../../hooks';
 import { Colors, FontSize } from '../../theme/Variables';
 
 export interface IBackWithPercentIndicatorProps {
-  percent: number;
+  percent?: number;
   onBack?: () => void;
+  isShowPercentIndicator?: boolean;
+  containerStyle?: any;
 }
 
-const BackWithPercentIndicator = (props: IBackWithPercentIndicatorProps) => {
+const BackWithPercentIndicator = ({
+  onBack,
+  isShowPercentIndicator = true,
+  percent,
+  containerStyle,
+}: IBackWithPercentIndicatorProps) => {
   const { Fonts } = useTheme();
   return (
     <View
       style={{
         ...styles.container,
+        ...containerStyle,
       }}
     >
-      <TouchableOpacity onPress={props.onBack}>
+      <TouchableOpacity onPress={onBack}>
         <Image style={styles.image} source={ICONS.Back} resizeMode="contain" />
       </TouchableOpacity>
-      <View style={styles.percentContainer}>
-        <View style={styles.percentContent}>
-          <View
-            style={{
-              ...styles.percentContentActive,
-              width: `${props.percent}%`,
-            }}
-          ></View>
+      {isShowPercentIndicator && (
+        <View style={styles.percentContainer}>
+          <View style={styles.percentContent}>
+            <View
+              style={{
+                ...styles.percentContentActive,
+                width: `${percent}%`,
+              }}
+            ></View>
+          </View>
         </View>
-      </View>
+      )}
     </View>
   );
 };

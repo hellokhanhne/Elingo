@@ -1,24 +1,28 @@
 import * as React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import Input from '../../../../components/common/Input';
-import { ICONS } from '../../../../constant';
-import { useTheme } from '../../../../hooks';
 import {
-  registerFormSelector,
-  setDataRegisterForm,
-} from '../../../../store/register';
-import { Colors } from '../../../../theme/Variables';
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Switch,
+} from 'react-native';
+import { useDispatch } from 'react-redux';
+import Input from '../../../components/common/Input';
+import { ICONS } from '../../../constant';
+import { useTheme } from '../../../hooks';
+import { Colors } from '../../../theme/Variables';
+import DevideLine from '../../../components/common/DevideLine';
 
-interface IStepFourProps {}
+interface ILoginFormProps {}
 
-const StepFour: React.FunctionComponent<IStepFourProps> = props => {
+const LoginForm: React.FunctionComponent<ILoginFormProps> = props => {
   const { Fonts } = useTheme();
   const [isShowPassword, setIsShowPassword] = React.useState(false);
-  const password = useSelector(registerFormSelector).data?.password;
+  //   const password = useSelector(registerFormSelector).data?.password;
   const dispatch = useDispatch();
   const handleChange = (password: string) => {
-    dispatch(setDataRegisterForm({ password }));
+    // dispatch(setDataRegisterForm({ password }));
   };
 
   const changeShowPassword = () => {
@@ -35,13 +39,25 @@ const StepFour: React.FunctionComponent<IStepFourProps> = props => {
         }}
       >
         {' '}
-        Tạo mật khẩu của bạn 🔐
+        Chào mừng bạn 👋
       </Text>
+      <Text style={styles.label}>Email</Text>
+      <Input
+        value={''}
+        keyboardType="email-address"
+        onChangeText={handleChange}
+      />
+      <View
+        style={{
+          marginBottom: 50,
+        }}
+      ></View>
       <Text style={styles.label}>Password</Text>
+
       <View style={styles.inputWrapper}>
         <Input
           style={styles.input}
-          value={password}
+          value={''}
           secureTextEntry={!isShowPassword}
           onChangeText={handleChange}
         />
@@ -51,6 +67,11 @@ const StepFour: React.FunctionComponent<IStepFourProps> = props => {
             source={isShowPassword ? ICONS.PasswordShow : ICONS.PasswordHide}
           />
         </TouchableOpacity>
+      </View>
+
+      <View>
+        {/* <CheckBox /> */}
+        <Switch />
       </View>
     </View>
   );
@@ -81,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepFour;
+export default LoginForm;
