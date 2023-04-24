@@ -1,79 +1,90 @@
 import * as React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Switch,
-} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Input from '../../../components/common/Input';
 import { ICONS } from '../../../constant';
 import { useTheme } from '../../../hooks';
 import { Colors } from '../../../theme/Variables';
-import DevideLine from '../../../components/common/DevideLine';
 
-interface ILoginFormProps {}
-
-const LoginForm: React.FunctionComponent<ILoginFormProps> = props => {
-  const { Fonts } = useTheme();
-  const [isShowPassword, setIsShowPassword] = React.useState(false);
-  //   const password = useSelector(registerFormSelector).data?.password;
-  const dispatch = useDispatch();
-  const handleChange = (password: string) => {
-    // dispatch(setDataRegisterForm({ password }));
+interface ILoginFormProps {
+  form: {
+    identifier: string;
+    password: string;
   };
+  setForm: React.Dispatch<
+    React.SetStateAction<{
+      identifier: string;
+      password: string;
+    }>
+  >;
+}
+
+const LoginForm: React.FunctionComponent<ILoginFormProps> = ({
+  form,
+  setForm,
+}) => {
+  const { Fonts } = useTheme();
+
+  const [isShowPassword, setIsShowPassword] = React.useState(false);
+
+  const dispatch = useDispatch();
 
   const changeShowPassword = () => {
     setIsShowPassword(!isShowPassword);
   };
 
   return (
-    <View>
-      <Text
-        style={{
-          ...Fonts.textBold,
-          ...Fonts.titleSmall,
-          ...styles.title,
-        }}
-      >
-        {' '}
-        Chào mừng bạn 👋
-      </Text>
-      <Text style={styles.label}>Email</Text>
-      <Input
-        value={''}
-        keyboardType="email-address"
-        onChangeText={handleChange}
-      />
-      <View
-        style={{
-          marginBottom: 50,
-        }}
-      ></View>
-      <Text style={styles.label}>Password</Text>
-
-      <View style={styles.inputWrapper}>
-        <Input
-          style={styles.input}
-          value={''}
-          secureTextEntry={!isShowPassword}
-          onChangeText={handleChange}
-        />
-        <TouchableOpacity onPress={changeShowPassword}>
-          <Image
-            style={styles.icon}
-            source={isShowPassword ? ICONS.PasswordShow : ICONS.PasswordHide}
-          />
-        </TouchableOpacity>
-      </View>
-
+    <>
       <View>
-        {/* <CheckBox /> */}
-        <Switch />
+        <Text
+          style={{
+            ...Fonts.textBold,
+            ...Fonts.titleSmall,
+            ...styles.title,
+          }}
+        >
+          {' '}
+          Chào mừng bạn 👋
+        </Text>
+        <Text style={styles.label}>Email</Text>
+        <Input
+          value={form.identifier}
+          keyboardType="email-address"
+          onChangeText={text =>
+            setForm({
+              ...form,
+              identifier: text,
+            })
+          }
+        />
+        <View
+          style={{
+            marginBottom: 50,
+          }}
+        ></View>
+        <Text style={styles.label}>Password</Text>
+
+        <View style={styles.inputWrapper}>
+          <Input
+            style={styles.input}
+            value={form.password}
+            secureTextEntry={!isShowPassword}
+            onChangeText={text =>
+              setForm({
+                ...form,
+                password: text,
+              })
+            }
+          />
+          <TouchableOpacity onPress={changeShowPassword}>
+            <Image
+              style={styles.icon}
+              source={isShowPassword ? ICONS.PasswordShow : ICONS.PasswordHide}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 

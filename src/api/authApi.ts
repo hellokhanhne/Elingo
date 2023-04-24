@@ -9,11 +9,8 @@ const authApi = {
     return axiosInstance.post('/auth/local', data);
   },
 
-  loadUser() {
-    return axiosInstance.get('/auth/loadUser');
-  },
-  changePassword(data: any) {
-    return axiosInstance.post('/auth/changePassword', data);
+  loadAuth() {
+    return axiosInstance.get('/user/me');
   },
 };
 

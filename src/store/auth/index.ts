@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../../api';
+import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setToken } from '../../utils/setTokens';
 
 export interface IUser {
   fullname: string;
@@ -17,7 +20,7 @@ export interface IAuthState {
 const initialState: IAuthState = {
   user: null,
   isAuthenticated: false,
-  isAuthLoading: false,
+  isAuthLoading: true,
   jwt: null,
 };
 
@@ -29,14 +32,48 @@ export const register = createAsyncThunk(
         ...userData,
         username: userData.email,
       });
-      console.log(response.data);
+
+      await AsyncStorage.setItem('token', response.data.jwt);
+      setToken(response.data.jwt);
       return response.data;
     } catch (error) {
+      setToken(null);
       console.log(error);
       throw new Error('Failed to register user');
     }
   },
 );
+
+const login = createAsyncThunk('users/login', async (payload: any) => {
+  try {
+    const response = await authApi.login(payload);
+    Toast.show({
+      type: 'success',
+      text1: 'Login successfully',
+    });
+    await AsyncStorage.setItem('token', response.data.jwt);
+    setToken(response.data.jwt);
+    return response.data;
+  } catch (error: any) {
+    setToken(null);
+    console.log(error);
+    Toast.show({
+      type: 'error',
+      text1: error?.error?.message || 'Failed to login',
+    });
+    throw new Error('Failed to login');
+  }
+});
+
+const loadAuth = createAsyncThunk('users/loadauth', async () => {
+  try {
+    const response = await authApi.loadAuth();
+  } catch (error) {
+    setToken(null);
+    console.log(error);
+    throw new Error('Failed to load auth');
+  }
+});
 
 const slice = createSlice({
   name: 'auth',
@@ -54,11 +91,27 @@ const slice = createSlice({
         state.isAuthLoading = false;
         state.isAuthenticated = false;
       });
+    builder
+      .addCase(login.fulfilled, (state, action) => {
+        state.isAuthLoading = false;
+        state.user = action.payload.user;
+        state.jwt = action.payload.jwt;
+        state.isAuthenticated = true;
+      })
+      .addCase(login.rejected, state => {
+        state.isAuthLoading = false;
+        state.isAuthenticated = false;
+      });
   },
 });
 
 export const authSelector = (state: { auth: IAuthState }) => {
   return state.auth;
+};
+
+export const AuthAction = {
+  login,
+  register,
 };
 
 export default slice.reducer;

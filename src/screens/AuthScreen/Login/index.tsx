@@ -1,38 +1,30 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import BackWithPercentIndicator from '../../../components/common/BackWithPercentIndicator';
 import { Button } from '../../../components/common/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  registerFormSelector,
-  setCurrentStepRegister,
-} from '../../../store/register';
-import { register } from '../../../store/auth';
 import { useAppDispatch } from '../../../hooks/store';
 import LoginForm from './LoginForm';
-import { ICONS } from '../../../constant';
+import { AuthAction } from '../../../store/auth';
 
 interface ILoginScreenProps {}
 
 const LoginScreen: React.FunctionComponent<ILoginScreenProps> = props => {
   const navigate = useNavigation();
+  const [form, setForm] = React.useState({
+    identifier: '',
+    password: '',
+  });
 
-  const { currentStep, data } = useSelector(registerFormSelector);
+  const dispatch = useAppDispatch();
 
-  // console.log(currentStep);
-
-  const dispatch = useDispatch();
-  const appDispatch = useAppDispatch();
-
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    console.log('ok');
+    dispatch(AuthAction.login(form));
+  };
 
   const handleBack = () => {
-    if (currentStep === 1) {
-      navigate.goBack();
-    } else {
-      dispatch(setCurrentStepRegister(currentStep - 1));
-    }
+    navigate.goBack();
   };
 
   return (
@@ -42,6 +34,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = props => {
       }}
     >
       <BackWithPercentIndicator
+        onBack={handleBack}
         containerStyle={{
           paddingHorizontal: '7.5%',
         }}
@@ -51,7 +44,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = props => {
 
       {/* body content  */}
       <View style={styles.bodyContainer}>
-        <LoginForm />
+        <LoginForm form={form} setForm={setForm} />
       </View>
       {/* bottom  */}
       <View style={styles.bottomContainer}>

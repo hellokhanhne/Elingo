@@ -15,36 +15,48 @@ import StartSurvayScreen from '../screens/StartSurvey';
 import { WelcomeScreen } from '../screens/WelcomeScreen';
 import RegisterScreen from '../screens/AuthScreen/Register';
 import LoginScreen from '../screens/AuthScreen/Login';
+import MainNavigator from './Main';
+import { useAppSelector } from '../hooks/store';
+import { authSelector } from '../store/auth';
 
 const Stack = createStackNavigator();
 
 // @refresh reset
 const ApplicationNavigator = () => {
   const { Layout, darkMode, NavigationTheme } = useTheme();
+  const { isAuthLoading, isAuthenticated } = useAppSelector(authSelector);
+  const auth = useAppSelector(authSelector);
+
+  console.log(auth);
   const { colors } = NavigationTheme;
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
+  if (isAuthLoading) return <SplashScreen />;
   return (
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
         <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{ headerShown: false }}
-        >
-          {/* <Stack.Screen name="Main" component={MainNavigator} /> */}
-          <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SplashScreen" component={SplashScreen} />
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-          <Stack.Screen
-            name="StartSurveyScreen"
-            component={StartSurvayScreen}
-          />
-          <Stack.Screen
-            name="WelcomeCreateProfileScreen"
-            component={WelcomeCreateProfileScreen}
-          />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {isAuthenticated ? (
+            <>
+              <Stack.Screen name="Main" component={MainNavigator} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="SplashScreen" component={SplashScreen} />
+              <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+              <Stack.Screen
+                name="StartSurveyScreen"
+                component={StartSurvayScreen}
+              />
+              <Stack.Screen
+                name="WelcomeCreateProfileScreen"
+                component={WelcomeCreateProfileScreen}
+              />
+              <Stack.Screen name="Register" component={RegisterScreen} />
+              <Stack.Screen name="Login" component={LoginScreen} />
+            </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
