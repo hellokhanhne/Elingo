@@ -70,6 +70,9 @@ export function WelcomeScreen(props: IWelcomeScreenProps) {
           text="Bắt đầu ngay"
         />
         <Button
+          onPress={() => {
+            navigate.navigate('Login' as never);
+          }}
           text="Tôi đã có tài khoản"
           type="light"
           containerStyle={{

@@ -62,4 +62,38 @@ const styles = StyleSheet.create({
   },
 });
 
+SplashScreen.NoNavigate = () => {
+  const { Fonts, Layout } = useTheme();
+  return (
+    <View style={styles.container}>
+      <View
+        style={{
+          ...Layout.center,
+          ...Layout.fill,
+        }}
+      >
+        <Image style={styles.images} source={IMAGES.Splash} />
+        <Text
+          style={{
+            ...Fonts.titleRegular,
+            ...Fonts.textSemiBold,
+            marginTop: 5,
+          }}
+        >
+          Elingo
+        </Text>
+      </View>
+
+      <View
+        style={{
+          height: '30%',
+          ...Layout.center,
+        }}
+      >
+        <Image style={styles.loading} source={ICONS.Loading} />
+      </View>
+    </View>
+  );
+};
+
 export default SplashScreen;

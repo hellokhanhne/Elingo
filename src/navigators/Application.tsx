@@ -3,7 +3,7 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 
 import { useFlipper } from '@react-navigation/devtools';
@@ -16,8 +16,8 @@ import { WelcomeScreen } from '../screens/WelcomeScreen';
 import RegisterScreen from '../screens/AuthScreen/Register';
 import LoginScreen from '../screens/AuthScreen/Login';
 import MainNavigator from './Main';
-import { useAppSelector } from '../hooks/store';
-import { authSelector } from '../store/auth';
+import { useAppDispatch, useAppSelector } from '../hooks/store';
+import { AuthAction, authSelector } from '../store/auth';
 
 const Stack = createStackNavigator();
 
@@ -25,13 +25,18 @@ const Stack = createStackNavigator();
 const ApplicationNavigator = () => {
   const { Layout, darkMode, NavigationTheme } = useTheme();
   const { isAuthLoading, isAuthenticated } = useAppSelector(authSelector);
-  const auth = useAppSelector(authSelector);
+  const dispatch = useAppDispatch();
 
-  console.log(auth);
   const { colors } = NavigationTheme;
+
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
-  if (isAuthLoading) return <SplashScreen />;
+
+  useEffect(() => {
+    dispatch(AuthAction.loadAuth());
+  }, []);
+
+  if (isAuthLoading) return <SplashScreen.NoNavigate />;
   return (
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>

@@ -12,14 +12,13 @@ interface ILoginScreenProps {}
 const LoginScreen: React.FunctionComponent<ILoginScreenProps> = props => {
   const navigate = useNavigation();
   const [form, setForm] = React.useState({
-    identifier: '',
-    password: '',
+    identifier: 'khanhjj70@gmail.com',
+    password: 'khanhdev',
   });
 
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
-    console.log('ok');
     dispatch(AuthAction.login(form));
   };
 

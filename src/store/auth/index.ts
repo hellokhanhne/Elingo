@@ -38,7 +38,6 @@ export const register = createAsyncThunk(
       return response.data;
     } catch (error) {
       setToken(null);
-      console.log(error);
       throw new Error('Failed to register user');
     }
   },
@@ -56,7 +55,6 @@ const login = createAsyncThunk('users/login', async (payload: any) => {
     return response.data;
   } catch (error: any) {
     setToken(null);
-    console.log(error);
     Toast.show({
       type: 'error',
       text1: error?.error?.message || 'Failed to login',
@@ -67,10 +65,11 @@ const login = createAsyncThunk('users/login', async (payload: any) => {
 
 const loadAuth = createAsyncThunk('users/loadauth', async () => {
   try {
-    const response = await authApi.loadAuth();
+    // const response = await authApi.loadAuth();
+    return true;
   } catch (error) {
+    await AsyncStorage.removeItem('token');
     setToken(null);
-    console.log(error);
     throw new Error('Failed to load auth');
   }
 });
@@ -102,6 +101,9 @@ const slice = createSlice({
         state.isAuthLoading = false;
         state.isAuthenticated = false;
       });
+    builder.addCase(loadAuth.fulfilled, (state, action) => {
+      state.isAuthLoading = false;
+    });
   },
 });
 
@@ -112,6 +114,7 @@ export const authSelector = (state: { auth: IAuthState }) => {
 export const AuthAction = {
   login,
   register,
+  loadAuth,
 };
 
 export default slice.reducer;
