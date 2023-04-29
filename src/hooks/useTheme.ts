@@ -17,6 +17,7 @@ import {
   ThemeNavigationTheme,
   ThemeNavigationColors,
 } from '../../@types/theme';
+import { Colors } from '../theme/Variables';
 
 export default function () {
   // Get the scheme device
@@ -31,7 +32,11 @@ export default function () {
   );
   const darkMode = isDark === null ? colorScheme === 'dark' : isDark;
 
-  let variables = {};
+  let variables = {
+    textWhite: {
+      color: Colors.white,
+    },
+  };
   let partialTheme = {};
   let darkVariables = {};
   let partialDarkTheme = {};

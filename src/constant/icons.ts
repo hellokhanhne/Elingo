@@ -5,6 +5,7 @@ const Indonesia = require('../assets/icons/indonesia.png');
 const China = require('../assets/icons/china.png');
 const Spain = require('../assets/icons/spain.png');
 const USA = require('../assets/icons/USA.png');
+const USACircle = require('../assets/icons/usa-circle.png');
 
 const Facebook = require('../assets/icons/facebook.png');
 const Google = require('../assets/icons/google.png');
@@ -25,6 +26,18 @@ const Star = require('../assets/icons/star.png');
 const StarOutline = require('../assets/icons/star-outline.png');
 const User = require('../assets/icons/user.png');
 const UserOutline = require('../assets/icons/user-outline.png');
+
+const Fire = require('../assets/icons/fire.png');
+const Diamond = require('../assets/icons/diamond.png');
+const StarExp = require('../assets/icons/star-exp.png');
+
+const Document = require('../assets/icons/document.png');
+const Play = require('../assets/icons/play.png');
+const Sound = require('../assets/icons/sound.png');
+const Book = require('../assets/icons/book.png');
+const Pencil = require('../assets/icons/pencil.png');
+const Mic = require('../assets/icons/mic.png');
+const Lock = require('../assets/icons/lock.png');
 
 const socialIcons = {
   Facebook,
@@ -69,11 +82,16 @@ const ICONS = {
   China,
   Spain,
   USA,
+  USACircle,
+  Fire,
+  StarExp,
+  Diamond,
   ...socialIcons,
   ...reasonsIcons,
   ...navigationIcons,
   PasswordHide,
   PasswordShow,
+  Document,
 };
 
 export default ICONS;
