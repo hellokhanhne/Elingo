@@ -1,11 +1,19 @@
 import * as React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '../../../../hooks';
 import { Colors } from '../../../../theme/Variables';
-import { ICONS, IMAGES } from '../../../../constant';
+import { ANIMATIONS, ICONS, IMAGES } from '../../../../constant';
 import { ILession, IPart } from '../../../../types';
-
+import { PrimaryToolTip, ToolTip } from '../../../../components/common/ToolTip';
+import AnimatedLottieView from 'lottie-react-native';
 interface ILessionProps {
   part: IPart;
 }
@@ -13,7 +21,6 @@ interface ILessionProps {
 let dimemsion = true;
 
 const getIconsByType = (type: string) => {
-  console.log(type);
   switch (type) {
     case 'write':
       return ICONS.Pencil;
@@ -23,9 +30,53 @@ const getIconsByType = (type: string) => {
       return ICONS.Sound;
     case 'choice':
       return ICONS.Book;
+    case 'mix':
+      return ICONS.Cup;
     default:
       return ICONS.Book;
   }
+};
+
+const StartToolTip = () => {
+  const [translateY] = React.useState(new Animated.Value(0));
+
+  React.useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(translateY, {
+          toValue: 10,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateY, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+  }, [translateY]);
+  return (
+    <Animated.View
+      style={{
+        position: 'absolute',
+        top: '-35%',
+        zIndex: 2,
+        transform: [
+          {
+            translateY: translateY,
+          },
+        ],
+      }}
+    >
+      <PrimaryToolTip
+        containerStyle={{
+          width: 130,
+        }}
+        arrow="bottom"
+      ></PrimaryToolTip>
+    </Animated.View>
+  );
 };
 
 const Lession = ({
@@ -38,14 +89,17 @@ const Lession = ({
   index: number;
 }) => {
   let img: any;
-  if (index === 0 && !lession.isCompeleted) {
+  let check;
+  if (index === 0 && !lession.isCompleted) {
     img = IMAGES.NodePrimary;
+    check = 2;
   } else {
-    img = lession.isCompeleted
+    img = lession.isCompleted
       ? IMAGES.NodeOrange
       : lession.prevCompleted
       ? IMAGES.NodePrimary
       : IMAGES.NodeSecondary;
+    check = lession.isCompleted ? 1 : lession.prevCompleted ? 2 : 3;
   }
 
   return (
@@ -58,8 +112,34 @@ const Lession = ({
         <View
           style={{
             position: 'relative',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 10,
           }}
         >
+          {index === 2 && (
+            <View
+              style={{
+                width: 200,
+                height: 230,
+                position: 'absolute',
+                justifyContent: 'flex-start',
+                left: '-250%',
+                bottom: '-20%',
+              }}
+            >
+              <AnimatedLottieView
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                source={ANIMATIONS.GreetingAnimation}
+                autoPlay={true}
+                resizeMode="cover"
+              />
+            </View>
+          )}
+          {check === 2 && <StartToolTip />}
           <Image
             style={{
               ...styles.lessionImg,
@@ -82,12 +162,17 @@ const Lession = ({
               style={{
                 width: 25,
                 height: 25,
-                tintColor: img == 49 ? '#afafaf' : Colors.white,
+                tintColor:
+                  check == 3
+                    ? '#afafaf'
+                    : check == 1
+                    ? '#cc7900'
+                    : Colors.white,
               }}
               source={
-                img == 48
+                check == 1
                   ? ICONS.Check
-                  : img == 47
+                  : check == 2
                   ? ICONS.Star
                   : getIconsByType(lession.type)
               }
@@ -119,7 +204,7 @@ const Lessions: React.FunctionComponent<ILessionProps> = ({ part }) => {
               marginBottom: 5,
             }}
           >
-            {part.partName}
+            {part.name}
           </Text>
           <Text
             style={{
@@ -127,7 +212,7 @@ const Lessions: React.FunctionComponent<ILessionProps> = ({ part }) => {
               color: Colors.white,
             }}
           >
-            {part.partTitle}
+            {part.title}
           </Text>
         </View>
         <View style={styles.headRight}>
@@ -160,13 +245,14 @@ const Lessions: React.FunctionComponent<ILessionProps> = ({ part }) => {
 
           return (
             <Lession
+              key={l.id}
               contentStyle={{
                 marginLeft: marginLeft,
               }}
               index={i}
               lession={{
                 ...l,
-                prevCompleted: part.lessions[i - 1]?.isCompeleted,
+                prevCompleted: part.lessions[i - 1]?.isCompleted,
               }}
             />
           );

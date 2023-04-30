@@ -18,6 +18,7 @@ import LoginScreen from '../screens/AuthScreen/Login';
 import MainNavigator from './Main';
 import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { AuthAction, authSelector } from '../store/auth';
+import { Colors } from '../theme/Variables';
 
 const Stack = createStackNavigator();
 
@@ -40,7 +41,10 @@ const ApplicationNavigator = () => {
   return (
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
-        <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
+        <StatusBar
+          barStyle={darkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={Colors.white}
+        />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {isAuthenticated ? (
             <>

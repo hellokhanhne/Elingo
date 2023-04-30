@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { Image, StyleSheet, View } from 'react-native';
-
-import { ICONS, IMAGES } from '../../constant';
+import AnimatedLottieView from 'lottie-react-native';
+import { ANIMATIONS, ICONS, IMAGES } from '../../constant';
 import { useTheme } from '../../hooks';
 
 const SplashScreen = () => {
@@ -41,7 +41,15 @@ const SplashScreen = () => {
           ...Layout.center,
         }}
       >
-        <Image style={styles.loading} source={ICONS.Loading} />
+        {/* <Image style={styles.loading} source={ICONS.Loading} /> */}
+        <AnimatedLottieView
+          source={ANIMATIONS.LoadingAnimation}
+          autoPlay={true}
+          style={{
+            width: 100,
+            height: 100,
+          }}
+        />
       </View>
     </View>
   );

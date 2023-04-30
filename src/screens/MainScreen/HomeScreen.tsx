@@ -15,146 +15,9 @@ import { ICONS } from '../../constant';
 
 import { IPart } from '../../types';
 import { Lessions } from './components/HomeComponent';
+import { useGetListPart } from '../../api/part/queries';
 
 export interface IHomeScreenProps {}
-
-const parts: IPart[] = [
-  {
-    partId: 1,
-    isCompleted: false,
-    titleBackground: ['#fe8896', '#ff646c'],
-    partTitle: 'Gọi đồ uống, giới thiệu bản thân',
-    partName: 'Cửa 1',
-    lessions: [
-      {
-        lessionId: 1,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: true,
-        type: 'write',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'write',
-          },
-        ],
-      },
-      {
-        lessionId: 2,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: true,
-        type: 'speak',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'speak',
-          },
-        ],
-      },
-      {
-        lessionId: 3,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'hear',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'hear',
-          },
-        ],
-      },
-      {
-        lessionId: 8,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'hear',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'hear',
-          },
-        ],
-      },
-      {
-        lessionId: 4,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'speak',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'hear',
-          },
-        ],
-      },
-      {
-        lessionId: 5,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'hear',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'hear',
-          },
-        ],
-      },
-      {
-        lessionId: 6,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'hear',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'hear',
-          },
-        ],
-      },
-      {
-        lessionId: 7,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'choice',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'hear',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    partId: 2,
-    titleBackground: ['#6be2b9', '#1ad393'],
-    partName: 'Cửa 2',
-    isCompleted: false,
-    partTitle: 'Nói về đồ vật của bạn',
-    lessions: [
-      {
-        lessionId: 1,
-        lessionTitle: 'Gọi đồ uống',
-        isCompeleted: false,
-        type: 'hear',
-
-        questions: [
-          {
-            questionId: 1,
-            type: 'write',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 const HeadContainer = ({ Layout, Fonts }: any) => {
   return (
@@ -209,9 +72,11 @@ const HeadContainer = ({ Layout, Fonts }: any) => {
 export function HomeScreen(props: IHomeScreenProps) {
   const { Layout, Fonts, Colors } = useTheme();
   const navigate = useNavigation();
+  const { data, isLoading } = useGetListPart({}, {});
+  const parts = data || [];
   return (
     <>
-      <StatusBar hidden={true} />
+      <StatusBar translucent={true} backgroundColor={'transparent'} />
       <View
         style={{
           ...Layout.fill,
@@ -226,7 +91,7 @@ export function HomeScreen(props: IHomeScreenProps) {
           }}
         >
           {parts.map(p => (
-            <Lessions key={p.partId} part={p} />
+            <Lessions key={p.id} part={p} />
           ))}
         </ScrollView>
       </View>
@@ -240,7 +105,7 @@ const styles = StyleSheet.create({
   },
   headContainer: {
     width: '100%',
-    height: '13.5%',
+    height: '11%',
     justifyContent: 'flex-end',
     borderBottomWidth: 1,
     borderBottomColor: Colors.lightGray,
@@ -249,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '5%',
+    marginBottom: '3%',
     paddingHorizontal: '5%',
   },
   headInfoIcon: {

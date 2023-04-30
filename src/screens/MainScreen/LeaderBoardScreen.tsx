@@ -10,14 +10,14 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
   const navigate = useNavigation();
   return (
     <>
-      <StatusBar backgroundColor={'#856aff'} hidden={true} />
+      <StatusBar translucent={true} backgroundColor={'transparent'} />
       <View
         style={{
           ...Layout.fill,
           ...styles.container,
         }}
       >
-        <Text>Home screen</Text>
+        <Text>LeaderBoard screen</Text>
       </View>
     </>
   );

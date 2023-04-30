@@ -39,6 +39,7 @@ const Pencil = require('../assets/icons/pencil.png');
 const Mic = require('../assets/icons/mic.png');
 const Lock = require('../assets/icons/lock.png');
 const Check = require('../assets/icons/check.png');
+const Cup = require('../assets/icons/cup.png');
 
 const socialIcons = {
   Facebook,
@@ -100,6 +101,7 @@ const ICONS = {
   Book,
   Mic,
   Lock,
+  Cup,
 };
 
 export default ICONS;

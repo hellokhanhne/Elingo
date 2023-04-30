@@ -7,22 +7,34 @@ import ApplicationNavigator from './navigators/Application';
 import './translations';
 import Toast from 'react-native-toast-message';
 
-const App = () => (
-  <>
-    <Provider store={store}>
-      {/**
-       * PersistGate delays the rendering of the app's UI until the persisted state has been retrieved
-       * and saved to redux.
-       * The `loading` prop can be `null` or any react instance to show during loading (e.g. a splash screen),
-       * for example `loading={<SplashScreen />}`.
-       * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
-       */}
-      <PersistGate loading={null} persistor={persistor}>
-        <ApplicationNavigator />
-      </PersistGate>
-    </Provider>
-    <Toast />
-  </>
-);
+import {
+  QueryClient,
+  QueryClientProvider,
+  focusManager,
+} from '@tanstack/react-query';
+
+const App = () => {
+  const queryClient = new QueryClient();
+
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          {/**
+           * PersistGate delays the rendering of the app's UI until the persisted state has been retrieved
+           * and saved to redux.
+           * The `loading` prop can be `null` or any react instance to show during loading (e.g. a splash screen),
+           * for example `loading={<SplashScreen />}`.
+           * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
+           */}
+          <PersistGate loading={null} persistor={persistor}>
+            <ApplicationNavigator />
+          </PersistGate>
+        </Provider>
+        <Toast />
+      </QueryClientProvider>
+    </>
+  );
+};
 
 export default App;

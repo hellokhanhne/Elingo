@@ -1,12 +1,15 @@
 import IQuestion from './Question.interface';
 
 interface ILession {
-  lessionId: number;
-  lessionTitle: string;
-  isCompeleted: boolean;
-  questions: IQuestion[];
-  prevCompleted?: boolean;
+  id: number;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
   type: string;
+  complete_users: any[];
+  isCompleted: boolean;
+  prevCompleted: boolean;
 }
 
 export default ILession;
