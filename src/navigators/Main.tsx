@@ -1,15 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+import { Image } from 'react-native';
+import { ICONS } from '../constant';
 import { AccountScreen } from '../screens/MainScreen/AccountScreen';
 import { ChallengeScreen } from '../screens/MainScreen/ChallengeScreen';
 import { HomeScreen } from '../screens/MainScreen/HomeScreen';
 import { LeaderBoardScreen } from '../screens/MainScreen/LeaderBoardScreen';
 import { PremiumScreen } from '../screens/MainScreen/PremiumScreen';
-import { Image } from 'react-native';
-import { ICONS } from '../constant';
 import { Colors } from '../theme/Variables';
 
 const homeName = 'Home';
+
 const leaderboard = 'Leaderboard';
 const premium = 'Premium';
 const challenge = 'Challenge';
@@ -67,6 +68,7 @@ function MainContainer() {
       })}
     >
       <Tab.Screen name={homeName} component={HomeScreen} />
+
       <Tab.Screen name={leaderboard} component={LeaderBoardScreen} />
       <Tab.Screen name={premium} component={PremiumScreen} />
       <Tab.Screen name={challenge} component={ChallengeScreen} />

@@ -9,6 +9,7 @@ export interface IButtonProps {
   text: string;
   type?: 'filled' | 'light';
   active?: boolean;
+  textStyles?: any;
 }
 
 export function Button({
@@ -17,6 +18,7 @@ export function Button({
   type = 'filled',
   text,
   active = true,
+  textStyles,
 }: IButtonProps) {
   const { Layout, Colors, Fonts } = useTheme();
 
@@ -58,6 +60,7 @@ export function Button({
           ...Fonts.textUppercase,
           fontSize: 16,
           ...textStyle,
+          ...textStyles,
         }}
       >
         {text}

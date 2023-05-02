@@ -19,6 +19,7 @@ import MainNavigator from './Main';
 import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { AuthAction, authSelector } from '../store/auth';
 import { Colors } from '../theme/Variables';
+import { LessionScreen } from '../screens/MainScreen/LessionScreen';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ const ApplicationNavigator = () => {
           {isAuthenticated ? (
             <>
               <Stack.Screen name="Main" component={MainNavigator} />
+              <Stack.Screen name="LessionScreen" component={LessionScreen} />
             </>
           ) : (
             <>

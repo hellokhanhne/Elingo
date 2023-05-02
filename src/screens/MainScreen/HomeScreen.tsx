@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import {
   Image,
@@ -8,14 +7,13 @@ import {
   Text,
   View,
 } from 'react-native';
-import { useTheme } from '../../hooks';
 import LinearGradient from 'react-native-linear-gradient';
-import { Colors } from '../../theme/Variables';
 import { ICONS } from '../../constant';
+import { useTheme } from '../../hooks';
+import { Colors } from '../../theme/Variables';
 
-import { IPart } from '../../types';
-import { Lessions } from './components/HomeComponent';
 import { useGetListPart } from '../../api/part/queries';
+import { Lessions } from './components/HomeComponent';
 
 export interface IHomeScreenProps {}
 
@@ -70,8 +68,8 @@ const HeadContainer = ({ Layout, Fonts }: any) => {
 };
 
 export function HomeScreen(props: IHomeScreenProps) {
-  const { Layout, Fonts, Colors } = useTheme();
-  const navigate = useNavigation();
+  const { Layout, Fonts } = useTheme();
+
   const { data, isLoading } = useGetListPart({}, {});
   const parts = data || [];
   return (

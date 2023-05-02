@@ -36,6 +36,7 @@ export const FontSize = {
   tiny: 14,
   small: 16,
   regular: 20,
+  medium: 18,
   large: 40,
 };
 

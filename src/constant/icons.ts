@@ -1,35 +1,38 @@
-const Loading = require('../assets/icons/Loading.gif');
-const Back = require('../assets/icons/Back.png');
+const Loading = require('../assets/icons/_loading.gif');
+const Back = require('../assets/icons/back.png');
 const Vietnam = require('../assets/icons/vietnam.png');
 const Indonesia = require('../assets/icons/indonesia.png');
 const China = require('../assets/icons/china.png');
 const Spain = require('../assets/icons/spain.png');
-const USA = require('../assets/icons/USA.png');
-const USACircle = require('../assets/icons/usa-circle.png');
+const USA = require('../assets/icons/_usa.png');
+const USACircle = require('../assets/icons/usa_circle.png');
 
 const Facebook = require('../assets/icons/facebook.png');
 const Google = require('../assets/icons/google.png');
-const AppStore = require('../assets/icons/app-store.png');
+const AppStore = require('../assets/icons/app_store.png');
 const YouTube = require('../assets/icons/youtube.png');
-const TikTok = require('../assets/icons/tik-tok.png');
+const TikTok = require('../assets/icons/tik_tok.png');
+const Telegram = require('../assets/icons/telegram.png');
+const Info = require('../assets/icons/info.png');
+const Messenger = require('../assets/icons/messenger.png');
 
-const PasswordShow = require('../assets/icons/password-show.png');
-const PasswordHide = require('../assets/icons/password-hide.png');
+const PasswordShow = require('../assets/icons/password_show.png');
+const PasswordHide = require('../assets/icons/password_hide.png');
 
 const Home = require('../assets/icons/home.png');
-const HomeOutline = require('../assets/icons/home-outline.png');
+const HomeOutline = require('../assets/icons/home_outline.png');
 const Challenge = require('../assets/icons/challenge.png');
-const ChallengeOutline = require('../assets/icons/challenge-outline.png');
+const ChallengeOutline = require('../assets/icons/challenge_outline.png');
 const Leaderboard = require('../assets/icons/leaderboard.png');
-const LeaderboardOutline = require('../assets/icons/leaderboard-outline.png');
+const LeaderboardOutline = require('../assets/icons/leaderboard_outline.png');
 const Star = require('../assets/icons/star.png');
-const StarOutline = require('../assets/icons/star-outline.png');
+const StarOutline = require('../assets/icons/star_outline.png');
 const User = require('../assets/icons/user.png');
-const UserOutline = require('../assets/icons/user-outline.png');
+const UserOutline = require('../assets/icons/user_outline.png');
 
 const Fire = require('../assets/icons/fire.png');
 const Diamond = require('../assets/icons/diamond.png');
-const StarExp = require('../assets/icons/star-exp.png');
+const StarExp = require('../assets/icons/star_exp.png');
 
 const Document = require('../assets/icons/document.png');
 const Play = require('../assets/icons/play.png');
@@ -39,7 +42,10 @@ const Pencil = require('../assets/icons/pencil.png');
 const Mic = require('../assets/icons/mic.png');
 const Lock = require('../assets/icons/lock.png');
 const Check = require('../assets/icons/check.png');
+const CheckSimple = require('../assets/icons/check_simple.png');
 const Cup = require('../assets/icons/cup.png');
+
+const Close = require('../assets/icons/close.png');
 
 const socialIcons = {
   Facebook,
@@ -102,6 +108,11 @@ const ICONS = {
   Mic,
   Lock,
   Cup,
+  Close,
+  CheckSimple,
+  Telegram,
+  Messenger,
+  Info,
 };
 
 export default ICONS;

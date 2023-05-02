@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { ICONS, IMAGES } from '../../constant';
+import { ICONS } from '../../constant';
 import { useTheme } from '../../hooks';
-import { Colors, FontSize } from '../../theme/Variables';
+import { Colors } from '../../theme/Variables';
 
 export interface IBackWithPercentIndicatorProps {
   percent?: number;
   onBack?: () => void;
   isShowPercentIndicator?: boolean;
   containerStyle?: any;
+  rightComponent?: React.ReactNode;
+  customLeftIcon?: any;
+  customIconStyle?: any;
 }
 
 const BackWithPercentIndicator = ({
@@ -17,6 +20,9 @@ const BackWithPercentIndicator = ({
   isShowPercentIndicator = true,
   percent,
   containerStyle,
+  rightComponent,
+  customIconStyle,
+  customLeftIcon,
 }: IBackWithPercentIndicatorProps) => {
   const { Fonts } = useTheme();
   return (
@@ -27,7 +33,11 @@ const BackWithPercentIndicator = ({
       }}
     >
       <TouchableOpacity onPress={onBack}>
-        <Image style={styles.image} source={ICONS.Back} resizeMode="contain" />
+        <Image
+          style={{ ...styles.image, ...customIconStyle }}
+          source={customLeftIcon || ICONS.Back}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
       {isShowPercentIndicator && (
         <View style={styles.percentContainer}>
@@ -41,6 +51,7 @@ const BackWithPercentIndicator = ({
           </View>
         </View>
       )}
+      {rightComponent && rightComponent}
     </View>
   );
 };
@@ -51,7 +62,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: '10%',
     flexDirection: 'row',
     height: 30,
-
     alignItems: 'center',
   },
   image: {
@@ -61,7 +71,7 @@ const styles = StyleSheet.create({
   percentContainer: {
     flex: 1,
     height: 15,
-    marginLeft: '15%',
+    marginLeft: 15,
   },
 
   percentContent: {
@@ -74,7 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     borderRadius: 10,
     position: 'absolute',
-
     left: 0,
     top: 0,
     bottom: 0,

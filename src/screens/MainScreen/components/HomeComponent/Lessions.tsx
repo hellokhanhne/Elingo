@@ -14,6 +14,7 @@ import { ANIMATIONS, ICONS, IMAGES } from '../../../../constant';
 import { ILession, IPart } from '../../../../types';
 import { PrimaryToolTip, ToolTip } from '../../../../components/common/ToolTip';
 import AnimatedLottieView from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 interface ILessionProps {
   part: IPart;
 }
@@ -88,8 +89,9 @@ const Lession = ({
   contentStyle: any;
   index: number;
 }) => {
+  const navigation = useNavigation();
   let img: any;
-  let check;
+  let check: any;
   if (index === 0 && !lession.isCompleted) {
     img = IMAGES.NodePrimary;
     check = 2;
@@ -102,12 +104,24 @@ const Lession = ({
     check = lession.isCompleted ? 1 : lession.prevCompleted ? 2 : 3;
   }
 
+  const handlePress = () => {
+    if (check === 2) {
+      navigation.navigate(
+        'LessionScreen' as never,
+        {
+          id: lession.id,
+        } as never,
+      );
+    }
+  };
+
   return (
     <View style={{ ...styles.lession }}>
       <TouchableOpacity
         style={{
           ...contentStyle,
         }}
+        onPress={handlePress}
       >
         <View
           style={{
