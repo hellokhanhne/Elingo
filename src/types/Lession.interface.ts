@@ -10,6 +10,7 @@ interface ILession {
   complete_users: any[];
   isCompleted: boolean;
   prevCompleted: boolean;
+  questions: IQuestion[];
 }
 
 export default ILession;

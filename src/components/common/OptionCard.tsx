@@ -13,6 +13,7 @@ export interface IOptionCardProps {
   onClick?: () => void;
   customIcons?: React.ReactNode;
   rightElement?: React.ReactNode;
+  wrappeTextStyle?: any;
 }
 
 export function OptionCard({
@@ -25,6 +26,7 @@ export function OptionCard({
   onClick,
   customIcons,
   rightElement,
+  wrappeTextStyle,
 }: IOptionCardProps) {
   const { Fonts } = useTheme();
   const activeContainer = active ? styles.containerActive : {};
@@ -43,6 +45,7 @@ export function OptionCard({
             flexDirection: 'row',
             alignItems: 'center',
             width: '100%',
+            ...wrappeTextStyle,
           }}
         >
           {icon && (

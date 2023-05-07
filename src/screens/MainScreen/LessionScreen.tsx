@@ -14,85 +14,100 @@ import { ICONS } from '../../constant';
 import { useTheme } from '../../hooks';
 import StepContainer from './components/LessionComponent/StepContainer';
 import { useGetOneLession } from '../../api/lession';
+import LessionProvider, {
+  useQuestionContext,
+} from '../../context/LessionContext';
+import { IQuestion } from '../../types';
 
 export interface ILessionScreenProps {
   route: any;
 }
 
-export function LessionScreen(props: ILessionScreenProps) {
-  const { Layout, Fonts, Colors } = useTheme();
+const BodyContent = ({ questions }: { questions: IQuestion[] }) => {
+  const { Layout } = useTheme();
   const navigate = useNavigation();
-  const { params } = props.route;
-  const { data } = useGetOneLession(params.id, {});
-  // console.log(data);
+  const { step, handeNextQuestion } = useQuestionContext();
 
   return (
-    <>
-      <View
-        style={{
-          ...styles.container,
-        }}
-      >
-        <StatusBar translucent={true} backgroundColor={'transparent'} />
-        <View>
-          <BackWithPercentIndicator
-            onBack={() => navigate.navigate('Home' as never)}
-            customLeftIcon={ICONS.Close}
-            customIconStyle={{
-              width: 15,
-              height: 15,
-            }}
-            percent={10}
-            isShowPercentIndicator={true}
-            containerStyle={{
-              paddingHorizontal: '7.5%',
-            }}
-            rightComponent={
-              <View
+    <View
+      style={{
+        ...styles.container,
+      }}
+    >
+      <StatusBar translucent={true} backgroundColor={'transparent'} />
+      <View>
+        <BackWithPercentIndicator
+          onBack={() => navigate.navigate('Home' as never)}
+          customLeftIcon={ICONS.Close}
+          customIconStyle={{
+            width: 15,
+            height: 15,
+          }}
+          percent={(100 / questions.length) * step}
+          // isShowPercentIndicator={true}
+          containerStyle={{
+            paddingHorizontal: '7.5%',
+          }}
+          rightComponent={
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginLeft: 15,
+              }}
+            >
+              <Image
+                source={ICONS.Diamond}
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginLeft: 15,
+                  width: 20,
+                  height: 20,
+                  marginRight: 5,
+                }}
+              />
+              <Text
+                style={{
+                  fontWeight: '900',
+                  color: '#212121',
                 }}
               >
-                <Image
-                  source={ICONS.Diamond}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    marginRight: 5,
-                  }}
-                />
-                <Text
-                  style={{
-                    fontWeight: '900',
-                    color: '#212121',
-                  }}
-                >
-                  957
-                </Text>
-              </View>
-            }
-          />
-        </View>
-        {/* body  */}
-        <ScrollView
-          style={{
-            ...Layout.fill,
-          }}
-        >
-          <StepContainer />
-        </ScrollView>
-        {/* bottom  */}
-        <View style={styles.bottomContainer}>
-          <Button
-            text="Kiểm Tra Đáp Án"
-            textStyles={{
-              textTransform: 'none',
-            }}
-          />
-        </View>
+                957
+              </Text>
+            </View>
+          }
+        />
       </View>
+      {/* body  */}
+      <ScrollView
+        style={{
+          ...Layout.fill,
+        }}
+      >
+        <StepContainer questions={questions} />
+      </ScrollView>
+      {/* bottom  */}
+      <View style={styles.bottomContainer}>
+        <Button
+          onPress={handeNextQuestion}
+          text="Kiểm Tra Đáp Án"
+          textStyles={{
+            textTransform: 'none',
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+
+export function LessionScreen(props: ILessionScreenProps) {
+  const { params } = props.route;
+  const { data } = useGetOneLession(params.id, {});
+  return (
+    <>
+      {data && (
+        <LessionProvider questions={data?.questions}>
+          <BodyContent questions={data?.questions} />
+        </LessionProvider>
+      )}
     </>
   );
 }

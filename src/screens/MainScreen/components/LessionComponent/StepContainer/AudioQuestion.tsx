@@ -4,20 +4,18 @@ import DuoDragDrop, {
   Word,
 } from '@jamsch/react-native-duo-drag-drop';
 import * as React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Sound from 'react-native-sound';
-import Lines from '../../../../../components/common/Lines';
 import { ICONS } from '../../../../../constant';
 import { useTheme } from '../../../../../hooks';
 import { Colors, FontSize } from '../../../../../theme/Variables';
+import Lines from '../../../../../components/common/Lines';
 import { IQuestionProps } from './IQuestionProps.type';
 
-interface IMeaningQuestionProps extends IQuestionProps {}
+interface IAudioQuestionProps extends IQuestionProps {}
 
-const MeaningQuestion: React.FunctionComponent<
-  IMeaningQuestionProps
-> = props => {
+const AudioQuestion: React.FunctionComponent<IAudioQuestionProps> = props => {
   const { Layout, Fonts } = useTheme();
   const sound = React.useRef<Sound>();
   const duoDragDropRef = React.useRef<DuoDragDropRef>(null);
@@ -44,6 +42,14 @@ const MeaningQuestion: React.FunctionComponent<
         }}
       >
         <TouchableOpacity
+          style={{
+            width: '100%',
+            borderColor: Colors.lightGray,
+            borderWidth: 1,
+            ...Layout.center,
+            paddingVertical: 25,
+            borderRadius: 10,
+          }}
           onPress={() => {
             try {
               sound?.current?.play(() => {});
@@ -57,41 +63,35 @@ const MeaningQuestion: React.FunctionComponent<
             start={{ x: 0.1, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={{
-              width: 50,
-              height: 50,
+              width: 80,
+              height: 80,
               ...Layout.center,
-              borderRadius: 25,
+              borderRadius: 40,
             }}
           >
             <Image
-              source={ICONS.Sound}
+              source={ICONS.Play}
               style={{
-                width: 25,
-                height: 25,
+                width: 40,
+                height: 40,
                 tintColor: Colors.white,
               }}
             />
           </LinearGradient>
+          <Text
+            style={{
+              marginTop: 20,
+              color: Colors.mediumGray,
+              fontWeight: '700',
+            }}
+          >
+            {' '}
+            Chạm để nghe audio
+          </Text>
         </TouchableOpacity>
-        <Text
-          style={{
-            fontSize: FontSize.medium,
-            fontWeight: '600',
-            marginLeft: 20,
-            color: Colors.black,
-            opacity: 0.7,
-            flex: 1,
-          }}
-        >
-          Tea and coffee.
-        </Text>
       </View>
 
-      <View
-        style={{
-          marginTop: '5%',
-        }}
-      >
+      <View>
         <DuoDragDrop
           ref={duoDragDropRef}
           wordHeight={50}
@@ -139,4 +139,4 @@ const MeaningQuestion: React.FunctionComponent<
   );
 };
 
-export default MeaningQuestion;
+export default AudioQuestion;

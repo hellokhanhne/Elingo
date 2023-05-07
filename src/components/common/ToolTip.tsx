@@ -6,12 +6,19 @@ import { Colors } from '../../theme/Variables';
 
 export interface IToolTipProps {
   arrow: 'top' | 'left' | 'right' | 'bottom';
-
+  alwaysAminate?: boolean;
   text?: string;
   containerStyle?: any;
+  children?: React.ReactNode;
 }
 
-function ToolTipDefault({ arrow, text, containerStyle }: IToolTipProps) {
+function ToolTipDefault({
+  arrow,
+  text,
+  containerStyle,
+  alwaysAminate,
+  children,
+}: IToolTipProps) {
   const { Fonts } = useTheme();
   let arrowStyle;
   switch (arrow) {
@@ -43,8 +50,10 @@ function ToolTipDefault({ arrow, text, containerStyle }: IToolTipProps) {
           {' '}
           {text}
         </Text> */}
+        {children && children}
         <AnimatedText
           content={text!}
+          alwaysAminate={alwaysAminate}
           textStyle={{
             ...Fonts.textSmall,
             ...Fonts.textSemiBold,

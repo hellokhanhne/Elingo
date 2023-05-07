@@ -7,6 +7,7 @@ export interface IAnimatedTextProps {
   textStyle?: any;
   style?: any;
   duration?: number;
+  alwaysAminate?: boolean;
 }
 
 export function AnimatedText(props: IAnimatedTextProps) {
@@ -33,7 +34,9 @@ export function AnimatedText(props: IAnimatedTextProps) {
   };
 
   React.useEffect(() => {
-    if (props.content !== oldText.current) {
+    if (props.alwaysAminate) {
+      animated();
+    } else if (!props.alwaysAminate && props.content !== oldText.current) {
       oldText.current = props.content;
       animated();
     }
