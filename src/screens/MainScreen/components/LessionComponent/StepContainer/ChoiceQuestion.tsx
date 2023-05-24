@@ -1,25 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '../../../../../hooks';
+import { useSound, useTheme } from '../../../../../hooks';
 import LinearGradient from 'react-native-linear-gradient';
 import { ICONS } from '../../../../../constant';
 import { Colors } from '../../../../../theme/Variables';
 import { OptionCard } from '../../../../../components/common/OptionCard';
 import { IQuestionProps } from './IQuestionProps.type';
+import { useQuestionContext } from '../../../../../context/LessionContext';
 
 interface IChoiceQuestionProps extends IQuestionProps {}
 {
 }
 
-const question = [
-  'Chàng trai đang ăn bánh mì',
-  'Chàng trai đang chơi game',
-  'Chàng trai đang xem phim',
-];
-
-const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = props => {
-  const [questions, setQuestions] = React.useState(question);
+const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = ({
+  question,
+}) => {
+  const [questions, setQuestions] = React.useState(question.content.options);
+  const sound = useSound(question.media.url);
   const { Layout, FontSize } = useTheme();
+  const { setCurrentResult } = useQuestionContext();
+  const [active, setActive] = React.useState('');
+
   return (
     <View style={styles.container}>
       <View
@@ -32,7 +33,7 @@ const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = props => {
         <TouchableOpacity
           onPress={() => {
             try {
-              //   sound?.current?.play(() => {});
+              sound?.current?.play(() => {});
             } catch (error) {
               console.log(error);
             }
@@ -69,7 +70,7 @@ const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = props => {
             flex: 1,
           }}
         >
-          Tea and coffee.
+          {question.title}
         </Text>
       </View>
       <View
@@ -77,16 +78,12 @@ const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = props => {
           marginTop: 40,
         }}
       >
-        {question.map(l => (
+        {question.content.options.map((l: any) => (
           <OptionCard
-            onClick={() =>
-              //   dispatch(
-              //     setSurvay({
-              //       learnReasons: l.name,
-              //     }),
-              //   )
-              {}
-            }
+            onClick={() => {
+              setCurrentResult(l);
+              setActive(l);
+            }}
             key={l}
             wrappeTextStyle={{
               justifyContent: 'center',
@@ -101,8 +98,7 @@ const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = props => {
               marginLeft: 0,
               flex: 0,
             }}
-            active={false}
-            // icon={l.icon}
+            active={l === active}
             title={l}
           />
         ))}

@@ -4,34 +4,32 @@ import DuoDragDrop, {
   Word,
 } from '@jamsch/react-native-duo-drag-drop';
 import * as React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Sound from 'react-native-sound';
-import { ICONS } from '../../../../../constant';
-import { useTheme } from '../../../../../hooks';
-import { Colors, FontSize } from '../../../../../theme/Variables';
 import Lines from '../../../../../components/common/Lines';
+import { ICONS } from '../../../../../constant';
+import { useSound, useTheme } from '../../../../../hooks';
+import { Colors } from '../../../../../theme/Variables';
 import { IQuestionProps } from './IQuestionProps.type';
+import { useQuestionContext } from '../../../../../context/LessionContext';
 
 interface IAudioQuestionProps extends IQuestionProps {}
 
-const AudioQuestion: React.FunctionComponent<IAudioQuestionProps> = props => {
+const AudioQuestion: React.FunctionComponent<IAudioQuestionProps> = ({
+  question,
+}) => {
   const { Layout, Fonts } = useTheme();
-  const sound = React.useRef<Sound>();
+  const sound = useSound(question.media.url);
   const duoDragDropRef = React.useRef<DuoDragDropRef>(null);
-  Sound.setCategory('Playback', true);
-  React.useEffect(() => {
-    const s = new Sound(
-      'https://res.cloudinary.com/wonder-place/video/upload/v1682933424/Tea_And_Coffe_fcdc4a9b8f.mp3',
-      null as any,
-      error => {
-        if (error) {
-          console.log('error', error);
-        }
-        sound.current = s;
-      },
-    );
-  }, []);
+
+  const { setCurrentResult } = useQuestionContext();
+
   return (
     <View>
       <View
@@ -97,18 +95,11 @@ const AudioQuestion: React.FunctionComponent<IAudioQuestionProps> = props => {
           wordHeight={50}
           wordGap={5}
           wordBankOffsetY={30}
-          words={[
-            'Juan',
-            'She',
-            'apples',
-            'today',
-            'with',
-            'eats',
-            'her',
-            'another',
-          ]}
+          words={question.word_medias.map(w => w.name)}
           onDrop={() => {
-            console.log(duoDragDropRef.current?.getAnsweredWords());
+            setCurrentResult(
+              duoDragDropRef.current?.getAnsweredWords()?.join(' '),
+            );
           }}
           renderLines={props => (
             <Lines

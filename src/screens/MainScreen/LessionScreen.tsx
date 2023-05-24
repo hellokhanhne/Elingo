@@ -18,6 +18,7 @@ import LessionProvider, {
   useQuestionContext,
 } from '../../context/LessionContext';
 import { IQuestion } from '../../types';
+import StatusBottomModal from '../../components/bottomModal/StatusBottomModal';
 
 export interface ILessionScreenProps {
   route: any;
@@ -26,7 +27,8 @@ export interface ILessionScreenProps {
 const BodyContent = ({ questions }: { questions: IQuestion[] }) => {
   const { Layout } = useTheme();
   const navigate = useNavigation();
-  const { step, handeNextQuestion } = useQuestionContext();
+  const { step, handeNextQuestion, handleCheckAnswer, statusModal } =
+    useQuestionContext();
 
   return (
     <View
@@ -87,13 +89,20 @@ const BodyContent = ({ questions }: { questions: IQuestion[] }) => {
       {/* bottom  */}
       <View style={styles.bottomContainer}>
         <Button
-          onPress={handeNextQuestion}
+          onPress={handleCheckAnswer}
           text="Kiểm Tra Đáp Án"
           textStyles={{
             textTransform: 'none',
           }}
         />
       </View>
+      {/* status modal  */}
+      <StatusBottomModal
+        status={statusModal.type}
+        onButtonClick={handeNextQuestion}
+        visible={statusModal.visiable}
+        correctAnswer={statusModal.correctAnswer}
+      />
     </View>
   );
 };

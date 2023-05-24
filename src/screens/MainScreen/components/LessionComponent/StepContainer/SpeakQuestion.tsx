@@ -12,17 +12,21 @@ import { ANIMATIONS, ICONS, IMAGES } from '../../../../../constant';
 import { ToolTip } from '../../../../../components/common/ToolTip';
 import { Colors } from '../../../../../theme/Variables';
 import DevideLine from '../../../../../components/common/DevideLine';
-import { useTheme } from '../../../../../hooks';
+import { useSound, useTheme } from '../../../../../hooks';
 import AnimatedLottieView from 'lottie-react-native';
 import { IQuestionProps } from './IQuestionProps.type';
+import { useQuestionContext } from '../../../../../context/LessionContext';
 
 interface ISpeakQuestionProps extends IQuestionProps {}
 
-const SpeakQuestion: React.FunctionComponent<ISpeakQuestionProps> = props => {
-  let [started, setStarted] = useState(true);
+const SpeakQuestion: React.FunctionComponent<ISpeakQuestionProps> = ({
+  question,
+}) => {
+  let [started, setStarted] = useState(false);
   let [results, setResults] = useState([]);
-
+  const sound = useSound(question.media.url);
   const { Fonts, Layout, FontSize } = useTheme();
+  const { setCurrentResult } = useQuestionContext();
 
   React.useEffect(() => {
     (async () => {
@@ -46,6 +50,7 @@ const SpeakQuestion: React.FunctionComponent<ISpeakQuestionProps> = props => {
 
   const onSpeechResults = async (result: any) => {
     setResults(result.value);
+    setCurrentResult(result.value[0]);
     if (started) {
       await stopSpeechToText();
     }
@@ -79,16 +84,16 @@ const SpeakQuestion: React.FunctionComponent<ISpeakQuestionProps> = props => {
           }}
         >
           <ToolTip
-            alwaysAminate={true}
+            // alwaysAminate={true}
             containerStyle={{
               maxWidth: '95%',
               paddingLeft: 40,
             }}
             arrow="left"
-            text={'Tea and coffe.'}
+            text={question.title}
           >
             <View style={styles.speakerTooltip}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => sound.current?.play()}>
                 <Image
                   source={ICONS.Sound}
                   style={{
@@ -144,6 +149,35 @@ const SpeakQuestion: React.FunctionComponent<ISpeakQuestionProps> = props => {
           </TouchableOpacity>
         )}
       </View>
+      {results?.length > 0 && (
+        <View style={{ ...styles.speakButton, ...Layout.rowCenter }}>
+          <Text
+            style={{
+              ...Fonts.textTiny,
+              color: Colors.gray,
+              fontWeight: '500',
+            }}
+          >
+            Phát âm của bạn :{' '}
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              paddingLeft: 15,
+            }}
+          >
+            <Text
+              style={{
+                ...Fonts.textTiny,
+                color: Colors.gray,
+                fontWeight: '600',
+              }}
+            >
+              {results[0]}
+            </Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 };

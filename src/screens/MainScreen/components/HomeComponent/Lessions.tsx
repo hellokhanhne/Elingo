@@ -15,11 +15,11 @@ import { ILession, IPart } from '../../../../types';
 import { PrimaryToolTip, ToolTip } from '../../../../components/common/ToolTip';
 import AnimatedLottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAppDispatch } from '../../../../hooks/store';
+import { setCurrentLessionId } from '../../../../store/lession';
 interface ILessionProps {
   part: IPart;
 }
-
-let dimemsion = true;
 
 const getIconsByType = (type: string) => {
   switch (type) {
@@ -90,6 +90,9 @@ const Lession = ({
   index: number;
 }) => {
   const navigation = useNavigation();
+
+  const dispatch = useAppDispatch();
+
   let img: any;
   let check: any;
   if (index === 0 && !lession.isCompleted) {
@@ -105,6 +108,7 @@ const Lession = ({
   }
 
   const handlePress = () => {
+    dispatch(setCurrentLessionId(lession.id));
     if (check === 2) {
       navigation.navigate(
         'LessionScreen' as never,
@@ -201,6 +205,7 @@ const Lession = ({
 const Lessions: React.FunctionComponent<ILessionProps> = ({ part }) => {
   const { Fonts } = useTheme();
   let marginLeft = 0;
+  let dimemsion = true;
   return (
     <View>
       <LinearGradient

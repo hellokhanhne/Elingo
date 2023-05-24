@@ -1,16 +1,17 @@
-import * as React from 'react';
-import { Alert, Image, Modal, StyleSheet, Text, View } from 'react-native';
-import { useTheme } from '../../hooks';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Image, Modal, StyleSheet, Text, View } from 'react-native';
 import { ICONS } from '../../constant';
+import { useSound, useTheme } from '../../hooks';
 import { Colors, FontSize } from '../../theme/Variables';
 import { Button } from '../common/Button';
+import { useCorrectSound, useIncorrectSound } from '../../hooks/useSound';
 
 interface IStatusBottomModalProps {
   status: 'success' | 'danger';
   onButtonClick: any;
   visible: boolean;
   correctAnswer?: string;
-  onClose: any;
+  onClose?: any;
 }
 
 const StatusBottomModal: React.FunctionComponent<IStatusBottomModalProps> = ({
@@ -18,11 +19,30 @@ const StatusBottomModal: React.FunctionComponent<IStatusBottomModalProps> = ({
   correctAnswer,
   onButtonClick,
   visible,
-  onClose,
 }) => {
   const { Layout, Fonts } = useTheme();
   const isSucess = status === 'success' ? true : false;
   let statusColor = isSucess ? '#14d18e' : '#f75554';
+  const translateYAnim = useRef(new Animated.Value(100)).current;
+
+  const correctAudio = useCorrectSound();
+
+  const inCorrectAudio = useIncorrectSound();
+
+  useEffect(() => {
+    if (visible) {
+      Animated.timing(translateYAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+      if (status === 'success') {
+        correctAudio.current?.play();
+      } else {
+        inCorrectAudio.current?.play();
+      }
+    }
+  }, [visible]);
 
   return (
     <Modal
@@ -34,7 +54,13 @@ const StatusBottomModal: React.FunctionComponent<IStatusBottomModalProps> = ({
       }}
     >
       <View style={styles.container}>
-        <View style={{ ...styles.content, backgroundColor: statusColor }}>
+        <Animated.View
+          style={{
+            ...styles.content,
+            backgroundColor: statusColor,
+            transform: [{ translateY: translateYAnim }],
+          }}
+        >
           <View
             style={{
               ...Layout.row,
@@ -73,7 +99,7 @@ const StatusBottomModal: React.FunctionComponent<IStatusBottomModalProps> = ({
                   fontWeight: '700',
                 }}
               >
-                {isSucess === true ? 'Tuyệt vời !!!' : 'Không chính xác !!!'}
+                {isSucess === true ? 'Tuyệt vời !!!' : 'Chưa chính xác !!!'}
               </Text>
             </View>
 
@@ -127,7 +153,7 @@ const StatusBottomModal: React.FunctionComponent<IStatusBottomModalProps> = ({
                   fontSize: 14,
                 }}
               >
-                I walk and she swim.
+                {correctAnswer}
               </Text>
             </View>
           )}
@@ -141,9 +167,9 @@ const StatusBottomModal: React.FunctionComponent<IStatusBottomModalProps> = ({
             textStyles={{
               color: statusColor,
             }}
-            onPress={() => {}}
+            onPress={onButtonClick}
           />
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );
@@ -156,7 +182,6 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-
     paddingHorizontal: '5%',
     paddingVertical: '7.5%',
   },

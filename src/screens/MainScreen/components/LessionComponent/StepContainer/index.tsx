@@ -21,8 +21,12 @@ interface IQuestionComponent extends IQuestionProps {
   Component: React.FunctionComponent<any>;
 }
 
-const QuestionComponent = ({ question, Component }: IQuestionComponent) => {
-  return <Component question={question} />;
+const QuestionComponent = ({
+  question,
+  Component,
+  ...props
+}: IQuestionComponent) => {
+  return <Component question={question} {...props} />;
 };
 
 const StepContainer: React.FunctionComponent<IStepContainerProps> = ({
@@ -31,21 +35,27 @@ const StepContainer: React.FunctionComponent<IStepContainerProps> = ({
   const { Fonts, FontSize } = useTheme();
   const { currentQuestion } = useQuestionContext();
   let Component;
+  let title;
   switch (currentQuestion?.type) {
     case 'speak':
+      title = 'Phát âm câu dưới đây';
       Component = SpeakQuestion;
       break;
     case 'choice':
+      title = 'Chọn đáp án phù hợp';
       Component = ChoiceQuestion;
       break;
     case 'hear':
+      title = 'Nhập vào những gì bạn nghe thấy';
       Component = AudioQuestion;
       break;
     case 'read':
+      title = 'Dịch câu dưới qua tiếng việt';
       Component = MeaningQuestion;
       break;
     case 'twopair':
       Component = WordPairQuestion;
+      title = 'Ghép từ với nghĩa tương ứng';
       break;
     default:
       break;
@@ -64,7 +74,7 @@ const StepContainer: React.FunctionComponent<IStepContainerProps> = ({
             fontWeight: '800',
           }}
         >
-          Dịch câu dưới qua tiếng việt
+          {title}
         </Text>
       </View>
       <DevideLine />

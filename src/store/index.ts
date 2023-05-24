@@ -18,6 +18,7 @@ import theme from './theme';
 import survay from './survay';
 import register from './register';
 import auth from './auth';
+import lession from './lession';
 
 const reducers = combineReducers({
   theme,
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   survay: survay,
   registerForm: register,
   auth: auth,
+  lession: lession,
 });
 
 const storage = new MMKV();

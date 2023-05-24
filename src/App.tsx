@@ -12,9 +12,11 @@ import {
   QueryClientProvider,
   focusManager,
 } from '@tanstack/react-query';
+import Sound from 'react-native-sound';
 
 const App = () => {
   const queryClient = new QueryClient();
+  Sound.setCategory('Playback', true);
 
   return (
     <>

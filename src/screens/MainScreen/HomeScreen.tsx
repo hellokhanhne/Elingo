@@ -71,7 +71,9 @@ export function HomeScreen(props: IHomeScreenProps) {
   const { Layout, Fonts } = useTheme();
 
   const { data, isLoading } = useGetListPart({}, {});
+
   const parts = data || [];
+
   return (
     <>
       <StatusBar translucent={true} backgroundColor={'transparent'} />
