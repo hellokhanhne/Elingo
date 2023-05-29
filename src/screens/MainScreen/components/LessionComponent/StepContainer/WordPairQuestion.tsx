@@ -121,7 +121,7 @@ const WordPairQuestion: React.FunctionComponent<IWordPairQuestionProps> = ({
   };
 
   if (disabledItems.length === rightArr.length + leftArr.length) {
-    console.log('true');
+    // console.log('true');
     setCurrentResult(true);
   }
 

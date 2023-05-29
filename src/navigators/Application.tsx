@@ -8,20 +8,24 @@ import { SafeAreaView, StatusBar } from 'react-native';
 
 import { useFlipper } from '@react-navigation/devtools';
 
+import ChatContextProvider from '../context/ChatContext';
 import { useTheme } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/store';
+import LoginScreen from '../screens/AuthScreen/Login';
+import RegisterScreen from '../screens/AuthScreen/Register';
+import { LessionComplete } from '../screens/LessionComplete';
+import { LessionScreen } from '../screens/MainScreen/LessionScreen';
 import { WelcomeCreateProfileScreen } from '../screens/ProfileScreen/WelcomeCreateProfile';
+import SettingScreen from '../screens/SettingScreen';
 import SplashScreen from '../screens/SplashSceen';
 import StartSurvayScreen from '../screens/StartSurvey';
 import { WelcomeScreen } from '../screens/WelcomeScreen';
-import RegisterScreen from '../screens/AuthScreen/Register';
-import LoginScreen from '../screens/AuthScreen/Login';
-import MainNavigator from './Main';
-import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { AuthAction, authSelector } from '../store/auth';
 import { Colors } from '../theme/Variables';
-import { LessionScreen } from '../screens/MainScreen/LessionScreen';
-import SettingScreen from '../screens/SettingScreen';
-import { LessionComplete } from '../screens/LessionComplete';
+import MainNavigator from './Main';
+import ChatRoomScreen from '../screens/ChatScreen/ChatRoomScreen';
+import { PremiumScreen } from '../screens/MainScreen/PremiumScreen';
+import { UserProfile } from '../screens/ProfileScreen/UserProfile';
 
 const Stack = createStackNavigator();
 
@@ -45,19 +49,34 @@ const ApplicationNavigator = () => {
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
         <StatusBar barStyle={'dark-content'} backgroundColor={Colors.white} />
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {isAuthenticated ? (
-            <>
-              <Stack.Screen name="Main" component={MainNavigator} />
-              <Stack.Screen name="LessionScreen" component={LessionScreen} />
-              <Stack.Screen name="SettingScreen" component={SettingScreen} />
-              <Stack.Screen
-                name="LessionComplete"
-                component={LessionComplete}
-              />
-            </>
-          ) : (
-            <>
+
+        {isAuthenticated ? (
+          <>
+            <ChatContextProvider>
+              <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Main" component={MainNavigator} />
+                <Stack.Screen name="LessionScreen" component={LessionScreen} />
+                <Stack.Screen name="SettingScreen" component={SettingScreen} />
+                <Stack.Screen name="premium" component={PremiumScreen} />
+                <Stack.Screen
+                  name="UserProfileScreen"
+                  component={UserProfile}
+                />
+                <Stack.Screen
+                  name="ChatRoom"
+                  component={ChatRoomScreen}
+                  options={{}}
+                />
+                <Stack.Screen
+                  name="LessionComplete"
+                  component={LessionComplete}
+                />
+              </Stack.Navigator>
+            </ChatContextProvider>
+          </>
+        ) : (
+          <>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="SplashScreen" component={SplashScreen} />
               <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
 
@@ -71,9 +90,9 @@ const ApplicationNavigator = () => {
               />
               <Stack.Screen name="Register" component={RegisterScreen} />
               <Stack.Screen name="Login" component={LoginScreen} />
-            </>
-          )}
-        </Stack.Navigator>
+            </Stack.Navigator>
+          </>
+        )}
       </NavigationContainer>
     </SafeAreaView>
   );

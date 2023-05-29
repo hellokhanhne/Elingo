@@ -121,7 +121,7 @@ const LessionProvider = ({
           result?.current?.toLocaleLowerCase() ===
           question.title?.toLocaleLowerCase()
         ) {
-          console.log(result?.current, question.title);
+          // console.log(result?.current, question.title);
           setStatusModal({
             visiable: true,
             type: 'success',

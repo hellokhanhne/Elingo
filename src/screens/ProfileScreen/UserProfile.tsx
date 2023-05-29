@@ -9,15 +9,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { LineChart } from 'react-native-gifted-charts';
 import tailwind from 'twrnc';
 import { Button } from '../../components/common/Button';
 import DevideLine from '../../components/common/DevideLine';
 import { ICONS } from '../../constant';
-import { useTheme, useUser } from '../../hooks';
+import { useTheme } from '../../hooks';
+import { IUser } from '../../store/auth';
 import { Colors } from '../../theme/Variables';
-import { LineChart } from 'react-native-gifted-charts';
+import { useChatContext } from '../../context/ChatContext';
 
-export interface IAccountScreenProps {}
+export interface IUserProfileProps {}
 
 const data = [
   {
@@ -54,20 +56,24 @@ const data = [
   },
 ];
 
-export function AccountScreen(props: IAccountScreenProps) {
+const lineData = [
+  { value: 224 },
+  { value: 142 },
+  { value: 212 },
+  { value: 59 },
+  { value: 79 },
+  { value: 68 },
+  { value: 93 },
+];
+
+export function UserProfile(props: any) {
   const { Layout, Fonts, FontSize } = useTheme();
   const navigation = useNavigation();
-  const user = useUser();
+  //   const user = useUser();
 
-  const lineData = [
-    { value: 224 },
-    { value: 142 },
-    { value: 212 },
-    { value: 59 },
-    { value: 79 },
-    { value: 68 },
-    { value: 93 },
-  ];
+  const { startDMChatRoom } = useChatContext();
+
+  const userDetails: IUser = props?.route?.params?.user;
 
   return (
     <>
@@ -94,21 +100,25 @@ export function AccountScreen(props: IAccountScreenProps) {
               ...Layout.rowHCenter,
             }}
           >
-            <Image
-              source={ICONS.Logo}
-              style={{
-                ...styles.icon,
-                marginRight: 10,
-              }}
-            />
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image
+                source={ICONS.Back}
+                style={{
+                  ...styles.icon,
+                  marginRight: 10,
+                }}
+              />
+            </TouchableOpacity>
             <Text
-              style={{
-                ...Fonts.textBlack,
-                ...tailwind`font-semibold`,
-                fontSize: FontSize.regular,
-              }}
+              style={[
+                {
+                  ...Fonts.textBlack,
+                  ...tailwind`font-semibold`,
+                },
+                tailwind`text-[18px]`,
+              ]}
             >
-              Tài khoản
+              {userDetails?.fullname}
             </Text>
             <View
               style={{
@@ -116,15 +126,13 @@ export function AccountScreen(props: IAccountScreenProps) {
                 ...Layout.alignItemsEnd,
               }}
             >
-              <TouchableOpacity
-                onPress={() => navigation.navigate('SettingScreen' as never)}
-              >
+              <TouchableOpacity>
                 <Image
                   style={{
                     width: 20,
                     height: 20,
                   }}
-                  source={ICONS.Setting}
+                  source={ICONS.Chat2Outline}
                 />
               </TouchableOpacity>
             </View>
@@ -135,7 +143,9 @@ export function AccountScreen(props: IAccountScreenProps) {
               <Image
                 style={tailwind`w-full h-full rounded-full`}
                 source={{
-                  uri: user?.avatar?.url || ICONS.Users,
+                  uri:
+                    userDetails?.avatar?.url ||
+                    'https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-dai-dien-avt-anime-1-600x600.jpg',
                 }}
               />
               <TouchableOpacity
@@ -156,7 +166,7 @@ export function AccountScreen(props: IAccountScreenProps) {
             <Text
               style={tailwind`font-semibold text-[24px] text-black mt-4 mb-3`}
             >
-              {user?.fullname}
+              {userDetails?.fullname}
             </Text>
             <Text>Đã tham gia từ 20 - 6 - 2020</Text>
           </View>
@@ -210,10 +220,10 @@ export function AccountScreen(props: IAccountScreenProps) {
             />
             <Button
               containerStyle={tailwind`flex-1 h-[42.5px] flex-row items-center`}
+              onPress={() => startDMChatRoom(userDetails)}
               textStyles={tailwind`normal-case`}
-              text="Cài đặt"
+              text="Nhắn tin"
               type="outlined"
-              onPress={() => navigation.navigate('SettingScreen' as never)}
               shadownShown={false}
               leftComponent={
                 <Image
@@ -221,7 +231,7 @@ export function AccountScreen(props: IAccountScreenProps) {
                     tailwind`w-[18px] h-[18px] mr-2`,
                     { tintColor: Colors.primary },
                   ]}
-                  source={ICONS.Setting}
+                  source={ICONS.Chat2Outline}
                 />
               }
             />

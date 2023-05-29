@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -9,13 +9,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useTheme } from '../../hooks';
+import { useTheme, useUser } from '../../hooks';
 import { FontSize } from '../../theme/Variables';
 import { ICONS } from '../../constant';
 import Tab from '../../components/common/Tab';
 import tailwind from 'twrnc';
 import DATASET from '../../constant/data';
 import DevideLine from '../../components/common/DevideLine';
+import { useGetListUsers } from '../../api/user/queries';
+import { IUser } from '../../store/auth';
+import { RANDOM_IMAGE_URL } from '../../utils/randomImage';
 
 export interface ILeaderBoardScreenProps {}
 
@@ -27,7 +30,7 @@ const tabs = [
     name: 'Theo tháng',
   },
   {
-    name: 'Tất cả',
+    name: 'Bạn bè',
   },
 ];
 
@@ -35,6 +38,25 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
   const { Layout, Fonts, Colors } = useTheme();
   const navigate = useNavigation();
   const [active, setActive] = useState('Theo tuần');
+
+  const user = useUser();
+
+  const { data } = useGetListUsers({});
+
+  const dataRender = useMemo(() => {
+    return data?.filter(u => u.id !== user?.id);
+  }, [data]);
+
+  const handleClickUser = (user: IUser) => {
+    if (user.id) {
+      navigate.navigate(
+        'UserProfileScreen' as never,
+        {
+          user: user,
+        } as never,
+      );
+    }
+  };
 
   return (
     <>
@@ -101,7 +123,11 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
 
         <FlatList
           style={tailwind`flex-1 mt-6`}
-          data={DATASET.leaderboards.results}
+          data={
+            active === 'Bạn bè'
+              ? (dataRender as any[])
+              : DATASET.leaderboards.results
+          }
           renderItem={({ item, index }) => {
             let colors;
             if (index === 0) colors = ['#ffc02d', 'text-white'];
@@ -112,7 +138,10 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
             }
 
             return (
-              <TouchableOpacity style={tailwind`flex-row items-center py-4`}>
+              <TouchableOpacity
+                style={tailwind`flex-row items-center py-4`}
+                onPress={() => handleClickUser(item)}
+              >
                 {index > 2 && (
                   <View
                     style={tailwind`w-[40px] h-[40px] items-center justify-center ${colors[0]} rounded-full`}
@@ -148,7 +177,10 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
                 <Image
                   style={tailwind`w-[55px] h-[55px] rounded-full ml-4`}
                   source={{
-                    uri: item.picture.large,
+                    uri:
+                      item.avatar?.url ||
+                      item?.picture?.large ||
+                      RANDOM_IMAGE_URL,
                   }}
                 />
                 <View
@@ -157,16 +189,16 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
                   <Text
                     style={tailwind` ml-6 font-semibold text-gray-600 text-[17px]`}
                   >
-                    {item.name.first + ' ' + item.name.last}
+                    {item.fullname || item?.name.first + ' ' + item?.name.last}
                   </Text>
                   <Text style={tailwind`text-black font-medium mt-[2px]`}>
-                    {`${2000 - (index + 1) * 100}`} XP
+                    {`${(item.id ? 1100 : 5000) - (index + 1) * 110}`} XP
                   </Text>
                 </View>
               </TouchableOpacity>
             );
           }}
-          keyExtractor={item => item.login.uuid}
+          keyExtractor={item => item.email || item?.login.uuid}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <DevideLine />}
         />

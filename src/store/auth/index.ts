@@ -3,11 +3,14 @@ import { authApi } from '../../api';
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setToken } from '../../utils/setTokens';
+import UserApi from '../../api/user/request';
 
 export interface IUser {
   fullname: string;
   age: string;
   email: string;
+  id: number;
+  avatar: any;
 }
 
 export interface IAuthState {
@@ -33,6 +36,8 @@ export const register = createAsyncThunk(
         username: userData.email,
       });
 
+      const UserInfo = await UserApi.findOne(response.data.user.id);
+
       await AsyncStorage.setItem('token', response.data.jwt);
       setToken(response.data.jwt);
       return response.data;
@@ -46,13 +51,30 @@ export const register = createAsyncThunk(
 const login = createAsyncThunk('users/login', async (payload: any) => {
   try {
     const response = await authApi.login(payload);
+    const UserInfo = await UserApi.findOne(response.data.user.id);
+
     Toast.show({
       type: 'success',
       text1: 'Login successfully',
     });
     await AsyncStorage.setItem('token', response.data.jwt);
     setToken(response.data.jwt);
-    return response.data;
+
+    console.warn({
+      ...response.data,
+      user: {
+        ...response.data.user,
+        avatar: UserInfo.data.avatar,
+      },
+    });
+
+    return {
+      ...response.data,
+      user: {
+        ...response.data.user,
+        avatar: UserInfo.data.avatar,
+      },
+    };
   } catch (error: any) {
     setToken(null);
     Toast.show({

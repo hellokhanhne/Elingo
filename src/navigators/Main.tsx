@@ -6,13 +6,13 @@ import { AccountScreen } from '../screens/MainScreen/AccountScreen';
 import { ChallengeScreen } from '../screens/MainScreen/ChallengeScreen';
 import { HomeScreen } from '../screens/MainScreen/HomeScreen';
 import { LeaderBoardScreen } from '../screens/MainScreen/LeaderBoardScreen';
-import { PremiumScreen } from '../screens/MainScreen/PremiumScreen';
 import { Colors } from '../theme/Variables';
+import ChatStackNavigation from './ChatStackNavigation';
 
 const homeName = 'Home';
 
 const leaderboard = 'Leaderboard';
-const premium = 'Premium';
+const premium = 'Chanels';
 const challenge = 'Challenge';
 const account = 'Account';
 
@@ -34,7 +34,7 @@ function MainContainer() {
               icon = focused ? ICONS.Leaderboard : ICONS.LeaderboardOutline;
               break;
             case premium:
-              icon = focused ? ICONS.Star : ICONS.StarOutline;
+              icon = focused ? ICONS.Chat2 : ICONS.Chat2Outline;
               break;
             case challenge:
               icon = focused ? ICONS.Challenge : ICONS.ChallengeOutline;
@@ -70,15 +70,7 @@ function MainContainer() {
       <Tab.Screen name={homeName} component={HomeScreen} />
 
       <Tab.Screen name={leaderboard} component={LeaderBoardScreen} />
-      <Tab.Screen
-        name={premium}
-        component={PremiumScreen}
-        options={{
-          tabBarStyle: {
-            display: 'none',
-          },
-        }}
-      />
+      <Tab.Screen name={premium} component={ChatStackNavigation} />
       <Tab.Screen name={challenge} component={ChallengeScreen} />
       <Tab.Screen name={account} component={AccountScreen} />
     </Tab.Navigator>

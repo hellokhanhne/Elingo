@@ -68,6 +68,8 @@ const Plus = require('../assets/icons/plus.png');
 const Setting = require('../assets/icons/settings.png');
 const Pencil2 = require('../assets/icons/pencil2.png');
 const Chat = require('../assets/icons/chat.png');
+const Chat2 = require('../assets/icons/chat_2.png');
+const Chat2Outline = require('../assets/icons/chat_2_outline.png');
 
 const Person = require('../assets/icons/person.png');
 const Bell = require('../assets/icons/bell.png');
@@ -176,6 +178,8 @@ const ICONS = {
   Setting,
   Pencil2,
   Chat,
+  Chat2,
+  Chat2Outline,
 };
 
 export default ICONS;

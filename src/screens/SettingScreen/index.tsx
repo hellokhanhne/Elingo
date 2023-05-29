@@ -20,6 +20,7 @@ import { useTheme } from '../../hooks';
 import { AuthAction } from '../../store/auth';
 import { useAppDispatch } from '../../hooks/store';
 import { useNavigation } from '@react-navigation/native';
+import { useChatContext } from '../../context/ChatContext';
 
 interface ISettingScreenProps {}
 
@@ -31,22 +32,28 @@ const data = [
     color: '#FD9E1B',
   },
   {
-    title: 'Thông báo',
-    icon: ICONS.Bell,
-    href: '',
-    color: '#ff7884',
-  },
-  {
-    title: 'Chung',
-    icon: ICONS.Menu,
-    href: '',
+    title: 'Gói cao cấp ( premium )',
+    icon: ICONS.Star,
+    href: 'premiumScreen',
     color: '#7c5fff',
   },
+  // {
+  //   title: 'Chung',
+  //   icon: ICONS.Menu,
+  //   href: '',
+  //   color: '#7c5fff',
+  // },
   {
     title: 'Truy cập',
     icon: ICONS.Compass,
     href: '',
     color: '#fd9c14',
+  },
+  {
+    title: 'Thông báo',
+    icon: ICONS.Bell,
+    href: '',
+    color: '#ff7884',
   },
   {
     title: 'Bảo mật',
@@ -83,6 +90,8 @@ const data = [
 const SettingScreen: React.FunctionComponent<ISettingScreenProps> = props => {
   const { Layout } = useTheme();
 
+  const { chatClient } = useChatContext();
+
   const navigation = useNavigation();
 
   // ref
@@ -105,7 +114,8 @@ const SettingScreen: React.FunctionComponent<ISettingScreenProps> = props => {
 
   const dispatch = useAppDispatch();
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
+    await chatClient.disconnectUser();
     dispatch(AuthAction.logout({}));
   };
 
@@ -142,7 +152,13 @@ const SettingScreen: React.FunctionComponent<ISettingScreenProps> = props => {
             renderItem={({ item, index }) => (
               <TouchableOpacity
                 style={tailwind`flex-row items-center py-3`}
-                onPress={handlePresentModalPress}
+                onPress={() => {
+                  if (item.href) {
+                    navigation.navigate('premium' as never);
+                  } else {
+                    handlePresentModalPress();
+                  }
+                }}
               >
                 <View
                   style={[
