@@ -90,8 +90,8 @@ export function HomeScreen(props: IHomeScreenProps) {
             ...Layout.fill,
           }}
         >
-          {parts.map(p => (
-            <Lessions key={p.id} part={p} />
+          {parts.map((p, index) => (
+            <Lessions index={index} key={p.id} part={p} />
           ))}
         </ScrollView>
       </View>

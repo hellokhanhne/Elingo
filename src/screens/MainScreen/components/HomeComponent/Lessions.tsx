@@ -19,6 +19,7 @@ import { useAppDispatch } from '../../../../hooks/store';
 import { setCurrentLessionId } from '../../../../store/lession';
 interface ILessionProps {
   part: IPart;
+  index: number;
 }
 
 const getIconsByType = (type: string) => {
@@ -84,10 +85,12 @@ const Lession = ({
   lession,
   index,
   contentStyle,
+  parentIndex,
 }: {
   lession: ILession;
   contentStyle: any;
   index: number;
+  parentIndex: number;
 }) => {
   const navigation = useNavigation();
 
@@ -135,7 +138,7 @@ const Lession = ({
             padding: 10,
           }}
         >
-          {index === 2 && (
+          {index === 2 && parentIndex % 2 === 0 && (
             <View
               style={{
                 width: 200,
@@ -154,6 +157,29 @@ const Lession = ({
                 source={ANIMATIONS.GreetingAnimation}
                 autoPlay={true}
                 resizeMode="cover"
+              />
+            </View>
+          )}
+
+          {index === 2 && parentIndex % 2 !== 0 && (
+            <View
+              style={{
+                width: 200,
+                height: 300,
+                position: 'absolute',
+                justifyContent: 'flex-start',
+                left: '100%',
+                bottom: '-60%',
+              }}
+            >
+              <AnimatedLottieView
+                style={{
+                  width: '105%',
+                  height: '105%',
+                }}
+                source={ANIMATIONS.Drink}
+                autoPlay={true}
+                resizeMode="contain"
               />
             </View>
           )}
@@ -202,10 +228,10 @@ const Lession = ({
   );
 };
 
-const Lessions: React.FunctionComponent<ILessionProps> = ({ part }) => {
+const Lessions: React.FunctionComponent<ILessionProps> = ({ part, index }) => {
   const { Fonts } = useTheme();
   let marginLeft = 0;
-  let dimemsion = true;
+  let dimemsion = index % 2 === 0;
   return (
     <View>
       <LinearGradient
@@ -264,6 +290,7 @@ const Lessions: React.FunctionComponent<ILessionProps> = ({ part }) => {
 
           return (
             <Lession
+              parentIndex={index}
               key={l.id}
               contentStyle={{
                 marginLeft: marginLeft,

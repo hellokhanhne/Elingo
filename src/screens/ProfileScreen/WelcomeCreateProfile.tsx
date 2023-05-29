@@ -1,13 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import {
-  Animated,
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, Text, View } from 'react-native';
 import { Button } from '../../components/common/Button';
 import { ToolTip } from '../../components/common/ToolTip';
 import { IMAGES } from '../../constant';
@@ -105,6 +98,7 @@ export function WelcomeCreateProfileScreen(
           text="Tạo tài khoản"
         />
         <Button
+          onPress={() => navigate.navigate('Login' as never)}
           text="Bỏ qua"
           type="light"
           containerStyle={{

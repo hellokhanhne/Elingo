@@ -77,7 +77,14 @@ const loadAuth = createAsyncThunk('users/loadauth', async () => {
 const slice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state, action) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.jwt = null;
+      setToken(null);
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -111,10 +118,13 @@ export const authSelector = (state: { auth: IAuthState }) => {
   return state.auth;
 };
 
+const { logout } = slice.actions;
+
 export const AuthAction = {
   login,
   register,
   loadAuth,
+  logout,
 };
 
 export default slice.reducer;

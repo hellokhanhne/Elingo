@@ -70,7 +70,15 @@ function MainContainer() {
       <Tab.Screen name={homeName} component={HomeScreen} />
 
       <Tab.Screen name={leaderboard} component={LeaderBoardScreen} />
-      <Tab.Screen name={premium} component={PremiumScreen} />
+      <Tab.Screen
+        name={premium}
+        component={PremiumScreen}
+        options={{
+          tabBarStyle: {
+            display: 'none',
+          },
+        }}
+      />
       <Tab.Screen name={challenge} component={ChallengeScreen} />
       <Tab.Screen name={account} component={AccountScreen} />
     </Tab.Navigator>

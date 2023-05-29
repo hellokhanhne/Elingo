@@ -7,12 +7,13 @@ export interface IOptionCardProps {
   containerStyle?: any;
   textStyle?: any;
   icon?: any;
-  title: string;
+  title?: string;
   active: boolean;
   changeTextVisiable?: boolean;
   onClick?: () => void;
   customIcons?: React.ReactNode;
   rightElement?: React.ReactNode;
+  leftElement?: React.ReactNode;
   wrappeTextStyle?: any;
 }
 
@@ -27,6 +28,7 @@ export function OptionCard({
   customIcons,
   rightElement,
   wrappeTextStyle,
+  leftElement,
 }: IOptionCardProps) {
   const { Fonts } = useTheme();
   const activeContainer = active ? styles.containerActive : {};
@@ -53,17 +55,20 @@ export function OptionCard({
           )}
           {customIcons && customIcons}
 
-          <Text
-            style={{
-              ...Fonts.textSemiBold,
-              ...Fonts.textRegular,
-              marginLeft: 20,
-              flex: 1,
-              ...textStyle,
-            }}
-          >
-            {title}
-          </Text>
+          {title && (
+            <Text
+              style={{
+                ...Fonts.textSemiBold,
+                ...Fonts.textRegular,
+                marginLeft: 20,
+                flex: 1,
+                ...textStyle,
+              }}
+            >
+              {title}
+            </Text>
+          )}
+          {leftElement && leftElement}
           {rightElement && rightElement}
           {changeTextVisiable && (
             <Text

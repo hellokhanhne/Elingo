@@ -13,6 +13,8 @@ export interface IBackWithPercentIndicatorProps {
   rightComponent?: React.ReactNode;
   customLeftIcon?: any;
   customIconStyle?: any;
+  isShowBack?: boolean;
+  percentStyle?: any;
 }
 
 const BackWithPercentIndicator = ({
@@ -23,6 +25,8 @@ const BackWithPercentIndicator = ({
   rightComponent,
   customIconStyle,
   customLeftIcon,
+  isShowBack = true,
+  percentStyle,
 }: IBackWithPercentIndicatorProps) => {
   const { Fonts } = useTheme();
   return (
@@ -32,15 +36,17 @@ const BackWithPercentIndicator = ({
         ...containerStyle,
       }}
     >
-      <TouchableOpacity onPress={onBack}>
-        <Image
-          style={{ ...styles.image, ...customIconStyle }}
-          source={customLeftIcon || ICONS.Back}
-          resizeMode="contain"
-        />
-      </TouchableOpacity>
+      {isShowBack && (
+        <TouchableOpacity onPress={onBack}>
+          <Image
+            style={{ ...styles.image, ...customIconStyle }}
+            source={customLeftIcon || ICONS.Back}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )}
       {isShowPercentIndicator && (
-        <View style={styles.percentContainer}>
+        <View style={{ ...styles.percentContainer, ...percentStyle }}>
           <View style={styles.percentContent}>
             <View
               style={{

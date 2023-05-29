@@ -20,6 +20,8 @@ import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { AuthAction, authSelector } from '../store/auth';
 import { Colors } from '../theme/Variables';
 import { LessionScreen } from '../screens/MainScreen/LessionScreen';
+import SettingScreen from '../screens/SettingScreen';
+import { LessionComplete } from '../screens/LessionComplete';
 
 const Stack = createStackNavigator();
 
@@ -42,20 +44,23 @@ const ApplicationNavigator = () => {
   return (
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
-        <StatusBar
-          barStyle={darkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={Colors.white}
-        />
+        <StatusBar barStyle={'dark-content'} backgroundColor={Colors.white} />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {isAuthenticated ? (
             <>
               <Stack.Screen name="Main" component={MainNavigator} />
               <Stack.Screen name="LessionScreen" component={LessionScreen} />
+              <Stack.Screen name="SettingScreen" component={SettingScreen} />
+              <Stack.Screen
+                name="LessionComplete"
+                component={LessionComplete}
+              />
             </>
           ) : (
             <>
               <Stack.Screen name="SplashScreen" component={SplashScreen} />
               <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+
               <Stack.Screen
                 name="StartSurveyScreen"
                 component={StartSurvayScreen}

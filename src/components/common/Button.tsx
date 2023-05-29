@@ -7,9 +7,11 @@ export interface IButtonProps {
   containerStyle?: any;
   onPress?: () => any;
   text: string;
-  type?: 'filled' | 'light';
+  type?: 'filled' | 'light' | 'outlined';
   active?: boolean;
   textStyles?: any;
+  leftComponent?: any;
+  shadownShown?: boolean;
 }
 
 export function Button({
@@ -19,14 +21,20 @@ export function Button({
   text,
   active = true,
   textStyles,
+  leftComponent,
+  shadownShown = true,
 }: IButtonProps) {
   const { Layout, Colors, Fonts } = useTheme();
 
   const btnStyle = active
     ? {
         backgroundColor:
-          type === 'filled' ? Colors.primary : Colors.lightPrimary,
-        ...(type === 'filled' ? styles.shadownButton : {}),
+          type === 'filled'
+            ? Colors.primary
+            : type === 'outlined'
+            ? Colors.white
+            : Colors.lightPrimary,
+        ...(type === 'filled' && shadownShown ? styles.shadownButton : {}),
       }
     : {
         backgroundColor: type === 'filled' ? Colors.gray : Colors.lightGray,
@@ -53,8 +61,15 @@ export function Button({
         ...Layout.center,
         ...btnStyle,
         ...containerStyle,
+        ...(type === 'outlined'
+          ? {
+              borderWidth: 1.75,
+              borderColor: Colors.primary,
+            }
+          : {}),
       }}
     >
+      {leftComponent && leftComponent}
       <Text
         style={{
           ...Fonts.textUppercase,

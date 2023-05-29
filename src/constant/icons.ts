@@ -33,6 +33,10 @@ const UserOutline = require('../assets/icons/user_outline.png');
 const Fire = require('../assets/icons/fire.png');
 const Diamond = require('../assets/icons/diamond.png');
 const StarExp = require('../assets/icons/star_exp.png');
+const Target = require('../assets/icons/target.png');
+const Energy = require('../assets/icons/energy.png');
+const RightArrow = require('../assets/icons/right_arrow.png');
+const RightArrow2 = require('../assets/icons/right_arrow_2.png');
 
 const Document = require('../assets/icons/document.png');
 const Play = require('../assets/icons/play.png');
@@ -44,8 +48,46 @@ const Lock = require('../assets/icons/lock.png');
 const Check = require('../assets/icons/check.png');
 const CheckSimple = require('../assets/icons/check_simple.png');
 const Cup = require('../assets/icons/cup.png');
+const Top = require('../assets/icons/top.png');
+
+const Calendar = require('../assets/icons/canlendar.png');
+const Clock = require('../assets/icons/clock.png');
+const Book_2 = require('../assets/icons/book_2.png');
+const HourGlass = require('../assets/icons/hourglass.png');
+const NoAds = require('../assets/icons/no_ads.png');
+
+const Paypal = require('../assets/icons/paypal.png');
+const ApplePay = require('../assets/icons/apple_pay.png');
+const MasterCard = require('../assets/icons/mastercard.png');
+
+const Logo = require('../assets/icons/logo.png');
 
 const Close = require('../assets/icons/close.png');
+const search = require('../assets/icons/search.png');
+const Plus = require('../assets/icons/plus.png');
+const Setting = require('../assets/icons/settings.png');
+const Pencil2 = require('../assets/icons/pencil2.png');
+const Chat = require('../assets/icons/chat.png');
+
+const Person = require('../assets/icons/person.png');
+const Bell = require('../assets/icons/bell.png');
+const Menu = require('../assets/icons/menu.png');
+const Compass = require('../assets/icons/compass.png');
+const Secure = require('../assets/icons/secure.png');
+const Users = require('../assets/icons/users.png');
+const InfoCircle = require('../assets/icons/info_circle.png');
+const Logout = require('../assets/icons/logout.png');
+
+const SettingIcons = {
+  Person,
+  Bell,
+  Menu,
+  Compass,
+  Secure,
+  Users,
+  InfoCircle,
+  Logout,
+};
 
 const socialIcons = {
   Facebook,
@@ -53,6 +95,9 @@ const socialIcons = {
   AppStore,
   YouTube,
   TikTok,
+  Paypal,
+  ApplePay,
+  MasterCard,
 };
 
 const navigationIcons = {
@@ -97,6 +142,7 @@ const ICONS = {
   ...socialIcons,
   ...reasonsIcons,
   ...navigationIcons,
+  ...SettingIcons,
   PasswordHide,
   PasswordShow,
   Document,
@@ -113,6 +159,23 @@ const ICONS = {
   Telegram,
   Messenger,
   Info,
+  Logo,
+  search,
+  Target,
+  Energy,
+  RightArrow,
+  RightArrow2,
+
+  Top,
+  Calendar,
+  Clock,
+  Book_2,
+  HourGlass,
+  NoAds,
+  Plus,
+  Setting,
+  Pencil2,
+  Chat,
 };
 
 export default ICONS;

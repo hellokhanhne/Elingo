@@ -48,7 +48,7 @@ const LessionProvider = ({
     mutationFn: (id: number) => LessionApi.updateUserCompleted(id),
     onSuccess() {
       queryClient.invalidateQueries(['/parts']);
-      navigation.navigate('Home' as never);
+      navigation.navigate('LessionComplete' as never);
     },
   });
 

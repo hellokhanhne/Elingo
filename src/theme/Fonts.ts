@@ -70,6 +70,9 @@ export default function ({ FontSize, Colors }: ThemeVariables) {
     textGray: {
       color: Colors.gray,
     },
+    textBlack: {
+      color: Colors.black,
+    },
     textLobster: {
       fontFamily: 'lobster',
       fontWeight: 'normal',
