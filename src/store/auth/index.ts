@@ -76,6 +76,7 @@ const login = createAsyncThunk('users/login', async (payload: any) => {
       },
     };
   } catch (error: any) {
+    console.log(error);
     setToken(null);
     Toast.show({
       type: 'error',

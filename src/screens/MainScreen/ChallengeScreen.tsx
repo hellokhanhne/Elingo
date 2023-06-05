@@ -139,7 +139,10 @@ export function ChallengeScreen(props: IChallengeScreenProps) {
           />
         </View>
 
-        <ScrollView style={tailwind`flex-1 mt-8`}>
+        <ScrollView
+          style={tailwind`flex-1 mt-8`}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={tailwind``}>
             {missions.map((m, index) => {
               return (

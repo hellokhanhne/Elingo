@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Sound from 'react-native-sound';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
@@ -8,8 +9,6 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import ApplicationNavigator from './navigators/Application';
 import { persistor, store } from './store';
 import './translations';
-import ChatContextProvider from './context/ChatContext';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const App = () => {
   const queryClient = new QueryClient();

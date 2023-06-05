@@ -21,6 +21,10 @@ const ChatsScreen = () => {
     navigation.navigate('ChatRoom' as never);
   };
 
+  const filters = {
+    $or: [{ type: 'livestream' }, { members: { $in: [chatClient.user.id] } }],
+  };
+
   return (
     <>
       <View
@@ -45,6 +49,7 @@ const ChatsScreen = () => {
         </Pressable>
       </View>
       <ChannelList
+        filters={filters as any}
         onSelect={onSelect}
         PreviewAvatar={({ channel }) => {
           const currentUser = chatClient?.user;
