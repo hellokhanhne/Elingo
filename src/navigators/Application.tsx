@@ -26,6 +26,7 @@ import MainNavigator from './Main';
 import ChatRoomScreen from '../screens/ChatScreen/ChatRoomScreen';
 import { PremiumScreen } from '../screens/MainScreen/PremiumScreen';
 import { UserProfile } from '../screens/ProfileScreen/UserProfile';
+import CallScreen from '../screens/CallScreen';
 
 const Stack = createStackNavigator();
 
@@ -77,6 +78,8 @@ const ApplicationNavigator = () => {
         ) : (
           <>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="CallScreen" component={CallScreen} />
+
               <Stack.Screen name="SplashScreen" component={SplashScreen} />
               <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
 
