@@ -11,6 +11,8 @@ interface ILession {
   isCompleted: boolean;
   prevCompleted: boolean;
   questions: IQuestion[];
+  exp: number;
+  diamond: number;
 }
 
 export default ILession;

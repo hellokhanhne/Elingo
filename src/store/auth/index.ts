@@ -11,6 +11,9 @@ export interface IUser {
   email: string;
   id: number;
   avatar: any;
+  exp?: number;
+  diamond?: number;
+  fire?: number;
 }
 
 export interface IAuthState {
@@ -107,6 +110,13 @@ const slice = createSlice({
       state.jwt = null;
       setToken(null);
     },
+    updateExp(state, action) {
+      state.user = {
+        ...state.user,
+        diamond: action.payload.diamond,
+        exp: action.payload.exp,
+      } as any;
+    },
   },
   extraReducers(builder) {
     builder
@@ -141,13 +151,14 @@ export const authSelector = (state: { auth: IAuthState }) => {
   return state.auth;
 };
 
-const { logout } = slice.actions;
+const { logout, updateExp } = slice.actions;
 
 export const AuthAction = {
   login,
   register,
   loadAuth,
   logout,
+  updateExp,
 };
 
 export default slice.reducer;

@@ -11,7 +11,7 @@ import {
 import BackWithPercentIndicator from '../../components/common/BackWithPercentIndicator';
 import { Button } from '../../components/common/Button';
 import { ICONS } from '../../constant';
-import { useTheme } from '../../hooks';
+import { useTheme, useUser } from '../../hooks';
 import StepContainer from './components/LessionComponent/StepContainer';
 import { useGetOneLession } from '../../api/lession';
 import LessionProvider, {
@@ -27,6 +27,7 @@ export interface ILessionScreenProps {
 const BodyContent = ({ questions }: { questions: IQuestion[] }) => {
   const { Layout } = useTheme();
   const navigate = useNavigation();
+  const user = useUser();
   const { step, handeNextQuestion, handleCheckAnswer, statusModal } =
     useQuestionContext();
 
@@ -72,7 +73,7 @@ const BodyContent = ({ questions }: { questions: IQuestion[] }) => {
                   color: '#212121',
                 }}
               >
-                957
+                {user.diamond}
               </Text>
             </View>
           }

@@ -44,7 +44,9 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
   const { data } = useGetListUsers({});
 
   const dataRender = useMemo(() => {
-    return data?.filter(u => u.id !== user?.id);
+    return data
+      ?.filter(u => u.id !== user?.id)
+      .sort((a: any, b: any) => b.exp - a.exp);
   }, [data]);
 
   const handleClickUser = (user: IUser) => {
@@ -192,7 +194,7 @@ export function LeaderBoardScreen(props: ILeaderBoardScreenProps) {
                     {item.fullname || item?.name.first + ' ' + item?.name.last}
                   </Text>
                   <Text style={tailwind`text-black font-medium mt-[2px]`}>
-                    {`${(item.id ? 1100 : 5000) - (index + 1) * 110}`} XP
+                    {`${item.exp ? item.exp : 10000 - (index + 1) * 110}`} XP
                   </Text>
                 </View>
               </TouchableOpacity>

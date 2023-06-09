@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ICONS } from '../../constant';
-import { useTheme } from '../../hooks';
+import { useTheme, useUser } from '../../hooks';
 import { Colors } from '../../theme/Variables';
 
 import { useGetListPart } from '../../api/part/queries';
@@ -18,6 +18,7 @@ import { Lessions } from './components/HomeComponent';
 export interface IHomeScreenProps {}
 
 const HeadContainer = ({ Layout, Fonts }: any) => {
+  const user = useUser();
   return (
     <LinearGradient
       colors={['#856aff', '#694bff']}
@@ -45,7 +46,7 @@ const HeadContainer = ({ Layout, Fonts }: any) => {
               color: Colors.white,
             }}
           >
-            4
+            {user.fire}
           </Text>
         </View>
         <View style={{ ...Layout.rowHCenter }}>
@@ -56,7 +57,7 @@ const HeadContainer = ({ Layout, Fonts }: any) => {
               color: Colors.white,
             }}
           >
-            957
+            {user.diamond}
           </Text>
         </View>
         <View style={{ ...Layout.rowHCenter }}>

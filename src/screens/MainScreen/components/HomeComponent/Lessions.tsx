@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native';
+import AnimatedLottieView from 'lottie-react-native';
 import * as React from 'react';
 import {
   Animated,
@@ -8,15 +10,13 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useTheme } from '../../../../hooks';
-import { Colors } from '../../../../theme/Variables';
+import { PrimaryToolTip } from '../../../../components/common/ToolTip';
 import { ANIMATIONS, ICONS, IMAGES } from '../../../../constant';
-import { ILession, IPart } from '../../../../types';
-import { PrimaryToolTip, ToolTip } from '../../../../components/common/ToolTip';
-import AnimatedLottieView from 'lottie-react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../../../../hooks';
 import { useAppDispatch } from '../../../../hooks/store';
 import { setCurrentLessionId } from '../../../../store/lession';
+import { Colors } from '../../../../theme/Variables';
+import { ILession, IPart } from '../../../../types';
 interface ILessionProps {
   part: IPart;
   index: number;
@@ -111,7 +111,7 @@ const Lession = ({
   }
 
   const handlePress = () => {
-    dispatch(setCurrentLessionId(lession.id));
+    dispatch(setCurrentLessionId(lession));
     if (check === 2) {
       navigation.navigate(
         'LessionScreen' as never,

@@ -3,16 +3,20 @@ import * as React from 'react';
 import { Image, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Button } from '../../components/common/Button';
 import { ICONS, IMAGES } from '../../constant';
-import { useTheme } from '../../hooks';
+import { useTheme, useUser } from '../../hooks';
 import { Text } from 'react-native';
 import tailwind from 'twrnc';
 import LinearGradient from 'react-native-linear-gradient';
+import { useAppSelector } from '../../hooks/store';
+import { lessionSelector } from '../../store/lession';
 
 export interface ILessionCompleteProps {}
 
 export function LessionComplete(props: ILessionCompleteProps) {
-  const { Layout, Fonts, Colors } = useTheme();
+  const { Layout, Colors } = useTheme();
   const navigate = useNavigation();
+  const user = useUser();
+  const { lession } = useAppSelector(lessionSelector);
   return (
     <>
       <StatusBar
@@ -67,7 +71,7 @@ export function LessionComplete(props: ILessionCompleteProps) {
                   style={tailwind`w-[35px] h-[35px] mr-3`}
                 />
                 <Text style={tailwind`font-semibold text-[26px] text-black`}>
-                  12
+                  {lession?.diamond}
                 </Text>
               </View>
             </LinearGradient>
@@ -82,7 +86,7 @@ export function LessionComplete(props: ILessionCompleteProps) {
                 <Text
                   style={tailwind`mt-4 mb-4 text-white font-semibold text-[16px]`}
                 >
-                  Tổng EXP
+                  EXP
                 </Text>
                 <View
                   style={tailwind`bg-white py-5 flex-row justify-center items-center w-[97.5%]  mb-[1.75%] rounded-b-xl`}
@@ -92,7 +96,7 @@ export function LessionComplete(props: ILessionCompleteProps) {
                     style={tailwind`w-[22px] h-[22px] mr-3`}
                   />
                   <Text style={tailwind`font-semibold text-[18px] text-black`}>
-                    24
+                    {lession?.exp}
                   </Text>
                 </View>
               </LinearGradient>
@@ -154,12 +158,9 @@ export function LessionComplete(props: ILessionCompleteProps) {
         >
           <Button
             onPress={() => {
-              navigate.navigate(
-                'Main' as never,
-                {
-                  screen: 'Home',
-                } as never,
-              );
+              navigate.navigate('Main', {
+                screen: 'Home',
+              });
             }}
             text="Tiếp tục"
           />

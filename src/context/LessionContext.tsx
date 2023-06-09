@@ -3,8 +3,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useContext, useRef, useState } from 'react';
 import LessionApi from '../api/lession/request';
 import { IQuestion } from '../types';
-import { useAppSelector } from '../hooks/store';
+import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { lessionSelector } from '../store/lession';
+import { useUser } from '../hooks';
+import UserApi from '../api/user/request';
+import { AuthAction } from '../store/auth';
 
 interface IStatusModal {
   visiable: boolean;
@@ -42,11 +45,22 @@ const LessionProvider = ({
 
   const queryClient = useQueryClient();
 
-  const { currentLessionId } = useAppSelector(lessionSelector);
+  const user = useUser();
+  const dispatch = useAppDispatch();
+
+  const { currentLessionId, lession } = useAppSelector(lessionSelector);
 
   const updateCompletedUserMutation = useMutation({
     mutationFn: (id: number) => LessionApi.updateUserCompleted(id),
-    onSuccess() {
+    async onSuccess() {
+      try {
+        const data = {
+          exp: (user as any).exp + lession?.exp,
+          diamond: (user as any).diamond + lession?.diamond,
+        };
+        await UserApi.updateExp(user.id, data);
+        dispatch(AuthAction.updateExp(data));
+      } catch (error) {}
       queryClient.invalidateQueries(['/parts']);
       navigation.navigate('LessionComplete' as never);
     },
@@ -64,6 +78,7 @@ const LessionProvider = ({
     resetResult();
     if (question?.id === questions[questions.length - 1].id) {
       updateCompletedUserMutation.mutate(currentLessionId as number);
+
       return;
     } else {
       const index = questions.findIndex(

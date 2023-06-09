@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ILession } from '../../types';
 
 export interface ILessionState {
   currentLessionId: number | null;
+  lession?: ILession;
 }
 
 const initialState: ILessionState = {
@@ -13,7 +15,8 @@ const slice = createSlice({
   initialState,
   reducers: {
     setCurrentLessionId: (state, action) => {
-      state.currentLessionId = action.payload;
+      state.currentLessionId = action.payload.id;
+      state.lession = action.payload;
     },
   },
   extraReducers(builder) {},

@@ -198,7 +198,7 @@ export function UserProfile(props: any) {
             </View>
             <View style={{ ...tailwind` h-full flex-1 items-center py-1` }}>
               <Text style={tailwind`font-semibold text-[18px] text-black mb-2`}>
-                1,536
+                {userDetails.diamond}
               </Text>
               <Text>Số lượng exp</Text>
             </View>
@@ -261,7 +261,11 @@ export function UserProfile(props: any) {
                     <Text
                       style={tailwind`font-semibold text-[16px] text-black mb-3`}
                     >
-                      {d.val}
+                      {d.title === 'Tổng kim cương'
+                        ? userDetails.diamond
+                        : d.title === 'Kinh nghiệm'
+                        ? userDetails.exp
+                        : d.val}
                     </Text>
                     <Text>{d.title}</Text>
                   </View>
