@@ -11,7 +11,6 @@
 		04989E74C978473CB0C8057E /* career.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D9860DAA1247F19E576E12 /* career.png */; };
 		0A0FED23BBD749A7BCB13C83 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C3A4989267743FFA756AD53 /* pencil.png */; };
 		0C80B921A6F3F58F76C31292 /* libPods-MyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-MyApp.a */; };
-		1226B8BC002D4F60900E0C63 /* app-store.png in Resources */ = {isa = PBXBuildFile; fileRef = 899EBCCDD1934A6AA253F446 /* app-store.png */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -102,9 +101,7 @@
 		7CA5BFFBAA684174A50AB8C9 /* secure.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CA7ACAC1A48A296CCB533 /* secure.png */; };
 		EFB13CE100F14509B5C5865B /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FA1A9FEB2450186D9E77F /* settings.png */; };
 		1218593CE47C491B9E0CB6C5 /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = EB6D5B0FB09F404BB2EC3FDF /* target.png */; };
-		F84A290CA976471CB51BAAF8 /* tik-tok.png in Resources */ = {isa = PBXBuildFile; fileRef = 51407E4091C141BC893E991A /* tik-tok.png */; };
 		C39AE0657B194B44AD4A1D7B /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = 6326A1376D3646A7B68B1099 /* top.png */; };
-		F7221BE20BC743E69E9C625F /* usa-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = E2DD428F4F864DF580991EAA /* usa-circle.png */; };
 		4AB4E12928764CAFBE15DD52 /* users.png in Resources */ = {isa = PBXBuildFile; fileRef = A3FE6CF7804D4BC3B82FC6AF /* users.png */; };
 		DB353D4C2C9D4D43ADD9F259 /* cool.png in Resources */ = {isa = PBXBuildFile; fileRef = FB883445C0ED44A4ABD7909D /* cool.png */; };
 		8954E983813441F08D126AB2 /* fun_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = B93261F93B5140389A207738 /* fun_pay.png */; };
@@ -164,7 +161,6 @@
 		68621533A0C548189CDB8B8B /* plane.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = plane.png; path = ../src/assets/icons/plane.png; sourceTree = "<group>"; };
 		7C9DDFC75AE446CEBD168617 /* sound.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = sound.png; path = ../src/assets/icons/sound.png; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MyApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		899EBCCDD1934A6AA253F446 /* app-store.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "app-store.png"; path = "../src/assets/icons/app-store.png"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-MyApp-MyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyApp-MyAppTests.release.xcconfig"; path = "Target Support Files/Pods-MyApp-MyAppTests/Pods-MyApp-MyAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		8D6092449203486F91274A50 /* challenge.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = challenge.png; path = ../src/assets/icons/challenge.png; sourceTree = "<group>"; };
 		944500AA5ACA450BBEB9624B /* loading.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = loading.json; path = ../src/assets/animation/loading.json; sourceTree = "<group>"; };
@@ -226,9 +222,7 @@
 		0E9CA7ACAC1A48A296CCB533 /* secure.png */ = {isa = PBXFileReference; name = "secure.png"; path = "../src/assets/icons/secure.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D97FA1A9FEB2450186D9E77F /* settings.png */ = {isa = PBXFileReference; name = "settings.png"; path = "../src/assets/icons/settings.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EB6D5B0FB09F404BB2EC3FDF /* target.png */ = {isa = PBXFileReference; name = "target.png"; path = "../src/assets/icons/target.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		51407E4091C141BC893E991A /* tik-tok.png */ = {isa = PBXFileReference; name = "tik-tok.png"; path = "../src/assets/icons/tik-tok.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6326A1376D3646A7B68B1099 /* top.png */ = {isa = PBXFileReference; name = "top.png"; path = "../src/assets/icons/top.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E2DD428F4F864DF580991EAA /* usa-circle.png */ = {isa = PBXFileReference; name = "usa-circle.png"; path = "../src/assets/icons/usa-circle.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A3FE6CF7804D4BC3B82FC6AF /* users.png */ = {isa = PBXFileReference; name = "users.png"; path = "../src/assets/icons/users.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FB883445C0ED44A4ABD7909D /* cool.png */ = {isa = PBXFileReference; name = "cool.png"; path = "../src/assets/images/cool.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B93261F93B5140389A207738 /* fun_pay.png */ = {isa = PBXFileReference; name = "fun_pay.png"; path = "../src/assets/images/fun_pay.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -387,7 +381,6 @@
 				AD5BE65D45FC4293B3C77FEC /* _nomalguider.png */,
 				9E5E221AAA4A47879C633397 /* _splashscreen.png */,
 				C6105C95A9F64E32966DB143 /* _welcome.png */,
-				899EBCCDD1934A6AA253F446 /* app-store.png */,
 				4180C61B805D49E2A3EA1E60 /* drink.json */,
 				5CDAF70841794DF19197961C /* speaking.json */,
 				F66E6B73834C4E93A15B8BF3 /* apple_pay.png */,
@@ -417,9 +410,7 @@
 				0E9CA7ACAC1A48A296CCB533 /* secure.png */,
 				D97FA1A9FEB2450186D9E77F /* settings.png */,
 				EB6D5B0FB09F404BB2EC3FDF /* target.png */,
-				51407E4091C141BC893E991A /* tik-tok.png */,
 				6326A1376D3646A7B68B1099 /* top.png */,
-				E2DD428F4F864DF580991EAA /* usa-circle.png */,
 				A3FE6CF7804D4BC3B82FC6AF /* users.png */,
 				FB883445C0ED44A4ABD7909D /* cool.png */,
 				B93261F93B5140389A207738 /* fun_pay.png */,
@@ -593,7 +584,6 @@
 				58CDEF84CEDC4E059B4B606C /* _nomalguider.png in Resources */,
 				8DAF3BC1801846D492CA1DD6 /* _splashscreen.png in Resources */,
 				72DB79AA44854A55BEA2CE7C /* _welcome.png in Resources */,
-				1226B8BC002D4F60900E0C63 /* app-store.png in Resources */,
 				501C1E69A1004FBF975744EB /* drink.json in Resources */,
 				B9B97151B5794B4C9B9D4BB6 /* speaking.json in Resources */,
 				3C9FBA1E53994AD1AF18C764 /* apple_pay.png in Resources */,
@@ -623,9 +613,7 @@
 				7CA5BFFBAA684174A50AB8C9 /* secure.png in Resources */,
 				EFB13CE100F14509B5C5865B /* settings.png in Resources */,
 				1218593CE47C491B9E0CB6C5 /* target.png in Resources */,
-				F84A290CA976471CB51BAAF8 /* tik-tok.png in Resources */,
 				C39AE0657B194B44AD4A1D7B /* top.png in Resources */,
-				F7221BE20BC743E69E9C625F /* usa-circle.png in Resources */,
 				4AB4E12928764CAFBE15DD52 /* users.png in Resources */,
 				DB353D4C2C9D4D43ADD9F259 /* cool.png in Resources */,
 				8954E983813441F08D126AB2 /* fun_pay.png in Resources */,

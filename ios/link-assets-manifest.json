@@ -26,10 +26,6 @@
       "sha1": "0271ac957f1b76a52176efadfd3602c817c8ab99"
     },
     {
-      "path": "src/assets/icons/app-store.png",
-      "sha1": "79274d7340564342ac777eccb705d2c2dcf37a0f"
-    },
-    {
       "path": "src/assets/icons/app_store.png",
       "sha1": "79274d7340564342ac777eccb705d2c2dcf37a0f"
     },
@@ -302,20 +298,12 @@
       "sha1": "e555c363f745984ead27409df8dd14b7349b9eaa"
     },
     {
-      "path": "src/assets/icons/tik-tok.png",
-      "sha1": "65ce5dc5463c93f8bc301c02d11bff8b12fb349d"
-    },
-    {
       "path": "src/assets/icons/tik_tok.png",
       "sha1": "65ce5dc5463c93f8bc301c02d11bff8b12fb349d"
     },
     {
       "path": "src/assets/icons/top.png",
       "sha1": "4500c22a64947794c9a000675ccc7ce3635a802d"
-    },
-    {
-      "path": "src/assets/icons/usa-circle.png",
-      "sha1": "992fcfd29b07b7811e93adca5d82ea26ef81d714"
     },
     {
       "path": "src/assets/icons/usa_circle.png",
