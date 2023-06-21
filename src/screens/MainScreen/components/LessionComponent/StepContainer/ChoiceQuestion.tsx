@@ -65,7 +65,7 @@ const ChoiceQuestion: React.FunctionComponent<IChoiceQuestionProps> = ({
             fontSize: FontSize.medium,
             fontWeight: '600',
             marginLeft: 20,
-            color: Colors.black,
+            color: 'red',
             opacity: 0.7,
             flex: 1,
           }}

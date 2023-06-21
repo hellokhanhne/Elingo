@@ -159,6 +159,11 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    // others dependencies
+  
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:5.0.0-alpha.11'
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 

@@ -72,6 +72,7 @@ const StepContainer: React.FunctionComponent<IStepContainerProps> = ({
             ...Fonts.textRegular,
             fontSize: FontSize.medium + 1,
             fontWeight: '800',
+            color: 'red',
           }}
         >
           {title}
