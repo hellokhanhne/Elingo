@@ -32,7 +32,7 @@ const ChatContextProvider = ({ children }: { children: React.ReactNode }) => {
         return;
       }
 
-      const client = StreamChat.getInstance('fwnrj5wkp7bd');
+      const client = StreamChat.getInstance('phydmhvvr39w');
 
       await client.connectUser(
         {

@@ -160,6 +160,8 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     // others dependencies
+
+    implementation 'com.google.ar:core:1.16.0'
   
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'

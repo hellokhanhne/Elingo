@@ -28,7 +28,7 @@ module.exports = {
       'svg',
       'png',
       'gif',
-      '',
+      'vrx',
     ],
   },
 };

@@ -8,6 +8,7 @@ import { HomeScreen } from '../screens/MainScreen/HomeScreen';
 import { LeaderBoardScreen } from '../screens/MainScreen/LeaderBoardScreen';
 import { Colors } from '../theme/Variables';
 import ChatStackNavigation from './ChatStackNavigation';
+import ARMode from '../screens/ArScreen';
 
 const homeName = 'Home';
 
@@ -15,6 +16,7 @@ const leaderboard = 'Leaderboard';
 const premium = 'Chanels';
 const challenge = 'Challenge';
 const account = 'Account';
+const armode = 'Armode';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +43,9 @@ function MainContainer() {
               break;
             case account:
               icon = focused ? ICONS.User : ICONS.UserOutline;
+              break;
+            case armode:
+              icon = ICONS.ArMode;
               break;
           }
           return (
@@ -72,6 +77,13 @@ function MainContainer() {
       <Tab.Screen name={leaderboard} component={LeaderBoardScreen} />
       <Tab.Screen name={premium} component={ChatStackNavigation} />
       <Tab.Screen name={challenge} component={ChallengeScreen} />
+      <Tab.Screen
+        options={{
+          tabBarStyle: { display: 'none' },
+        }}
+        name={armode}
+        component={ARMode}
+      />
       <Tab.Screen name={account} component={AccountScreen} />
     </Tab.Navigator>
   );

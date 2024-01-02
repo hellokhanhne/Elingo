@@ -79,6 +79,7 @@ const Secure = require('../assets/icons/secure.png');
 const Users = require('../assets/icons/users.png');
 const InfoCircle = require('../assets/icons/info_circle.png');
 const Logout = require('../assets/icons/logout.png');
+const ArMode = require('../assets/icons/ar.png');
 
 const SettingIcons = {
   Person,
@@ -180,6 +181,7 @@ const ICONS = {
   Chat,
   Chat2,
   Chat2Outline,
+  ArMode,
 };
 
 export default ICONS;
