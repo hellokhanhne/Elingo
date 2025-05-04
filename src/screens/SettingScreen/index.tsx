@@ -31,12 +31,12 @@ const data = [
     href: '',
     color: '#FD9E1B',
   },
-  {
-    title: 'Gói cao cấp ( premium )',
-    icon: ICONS.Star,
-    href: 'premiumScreen',
-    color: '#7c5fff',
-  },
+  // {
+  //   title: 'Gói cao cấp ( premium )',
+  //   icon: ICONS.Star,
+  //   href: 'premiumScreen',
+  //   color: '#7c5fff',
+  // },
   // {
   //   title: 'Chung',
   //   icon: ICONS.Menu,

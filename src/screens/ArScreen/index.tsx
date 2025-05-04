@@ -14,7 +14,7 @@ const ARMode = () => {
   return (
     <Webview
       source={{
-        uri: 'https://x0vp0.zappar.io/4192883167005546305/7/',
+        uri: 'https://mxqml.zappar-us.io/451224446029788652/',
       }}
       onMessage={handleMessage}
       style={{ flex: 1 }}
